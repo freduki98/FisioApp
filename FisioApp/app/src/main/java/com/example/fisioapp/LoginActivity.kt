@@ -21,7 +21,6 @@ class LoginActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener, Adap
     private var estado = "Malo"
     private var provincia = ""
     private var idioma = ""
-    private var ojo = ""
 
     private lateinit var adapterProvincias: ArrayAdapter<CharSequence>
     private lateinit var adapterIdiomas: ArrayAdapter<CharSequence>
