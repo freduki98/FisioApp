@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "344144215542",
+    "project_id": "fisioapp-7b465",
+    "storage_bucket": "fisioapp-7b465.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:344144215542:android:e1cf5139d65a6c3a3e9bd7",
+        "android_client_info": {
+          "package_name": "com.example.fisioapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "344144215542-lr9bis35gepdui7pkvaqasvgo4158etj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fisioapp",
+            "certificate_hash": "eb4960359c464ac3da440d990bbde6309a2356a4"
+          }
+        },
+        {
+          "client_id": "344144215542-mcefn4h0jjnof9flb5imu3ur7qliog78.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAToB-NsnXXht4WuYWjHIavJvtNTolYthQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "344144215542-mcefn4h0jjnof9flb5imu3ur7qliog78.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
