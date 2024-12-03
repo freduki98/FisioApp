@@ -16,21 +16,24 @@
         android:theme="@style/Base.Theme.FisioApp_noActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".GaleriaActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddActivity"
             android:exported="false"
-            android:theme="@style/Base.Theme.FisioApp_noActionBar"/>
+            android:theme="@style/Base.Theme.FisioApp_noActionBar" />
         <activity
             android:name=".ClientesActivity"
             android:exported="false"
-            android:theme="@style/Base.Theme.FisioApp_actionBar"/>
+            android:theme="@style/Base.Theme.FisioApp_actionBar" />
         <activity
             android:name=".AnunciosActivity"
             android:exported="false"
-            android:theme="@style/Base.Theme.FisioApp_noActionBar"/>
+            android:theme="@style/Base.Theme.FisioApp_noActionBar" />
         <activity
             android:name=".AppActivity"
             android:exported="false"
-            android:theme="@style/Base.Theme.FisioApp_noActionBar"/>
+            android:theme="@style/Base.Theme.FisioApp_noActionBar" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

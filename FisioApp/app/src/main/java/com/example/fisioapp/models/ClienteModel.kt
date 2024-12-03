@@ -3,8 +3,9 @@ package com.example.fisioapp.models
 import java.io.Serializable
 
 data class ClienteModel(
-    val id: Int,
+    val dni: String,
     val nombre: String,
     val direccion: String,
-    val dni: String
+    val lesion: String,
+    val tratamiento: String
 ) : Serializable

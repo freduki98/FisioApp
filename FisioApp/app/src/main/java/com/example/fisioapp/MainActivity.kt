@@ -73,9 +73,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setListeners() {
-        binding.btnLimpiar.setOnClickListener {
-            limpiar()
-        }
         binding.btnLogin.setOnClickListener {
             login()
         }

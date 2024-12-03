@@ -7,10 +7,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fisioapp.adapters.NewsAdapter
 import com.example.fisioapp.databinding.ActivityAnunciosBinding
+import com.example.fisioapp.fragments.MenuFragment
 import com.example.fisioapp.models.NewsModel
 import com.example.fisioapp.providers.NewProvider.newProvider
 import kotlinx.coroutines.Dispatchers
@@ -40,10 +42,11 @@ class AnunciosActivity : AppCompatActivity() {
         setListeners()
         api = getString(R.string.news_api)
         setRecycler()
-        traerNoticias("physical+therapy")
-        Toast.makeText(this, "Noticias de Salud por defecto", Toast.LENGTH_SHORT).show()
+        traerNoticias("fisioterapia")
+        Toast.makeText(this, "Noticias sobre Fisioterapia por defecto", Toast.LENGTH_SHORT).show()
 
     }
+
 
 //    private fun irDetalle(noticia: NewsModel) {
 //        val i = Intent(this, DetalleActivity::class.java).apply {

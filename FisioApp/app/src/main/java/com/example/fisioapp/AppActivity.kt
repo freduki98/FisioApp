@@ -60,10 +60,10 @@ class AppActivity : AppCompatActivity(), OnFragmentActionListener {
             }
             startActivity(i)
         } else if(btn == 1){
-//            val i= Intent(this, GaleriaActivity::class.java).apply {
-//                putExtra("BOTONPULSADO", btn)
-//            }
-//            startActivity(i)
+            val i= Intent(this, GaleriaActivity::class.java).apply {
+                putExtra("BOTONPULSADO", btn)
+            }
+            startActivity(i)
         } else if(btn == 2){
             val i= Intent(this, ClientesActivity::class.java).apply {
                 putExtra("BOTONPULSADO", btn)

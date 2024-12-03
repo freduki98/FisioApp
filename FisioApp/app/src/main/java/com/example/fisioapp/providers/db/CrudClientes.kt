@@ -8,11 +8,10 @@ import com.example.fisioapp.models.ClienteModel
 class CrudClientes {
     fun create (c: ClienteModel): Long{
 
-        // val cv = c.toContentValues()
         val con = Aplicacion.llave.writableDatabase // Abrimos la base de datos en modo escritura
 
         return try {
-            // Insertamos el contacto en la base de datos
+            // Insertamos el cliente en la base de datos
             con.insertWithOnConflict(
                 Aplicacion.TABLA,
                 null,
@@ -35,7 +34,7 @@ class CrudClientes {
         try {
             val cursor = con.query(
                 Aplicacion.TABLA,
-                arrayOf("id", "nombre", "direccion", "dni"),
+                arrayOf("dni", "nombre", "direccion", "lesion", "tratamiento"),
                 null,
                 null,
                 null,
@@ -43,11 +42,12 @@ class CrudClientes {
                 null
             )
             while (cursor.moveToNext()) {
-                val id = cursor.getInt(0)
+                val dni = cursor.getString(0)
                 val nombre = cursor.getString(1)
                 val direccion = cursor.getString(2)
-                val dni = cursor.getString(3)
-                val cliente = ClienteModel(id, nombre, direccion, dni)
+                val lesion = cursor.getString(3)
+                val tratamiento = cursor.getString(4)
+                val cliente = ClienteModel(dni, nombre, direccion, lesion, tratamiento)
 
                 lista.add(cliente)
             }
@@ -59,9 +59,9 @@ class CrudClientes {
         return lista
     }
 
-    public fun borrar (id: Int): Boolean{
+    public fun borrar (dni: String): Boolean{
         val con = Aplicacion.llave.writableDatabase
-        val clienteBorrado = con.delete(Aplicacion.TABLA, "id=?", arrayOf(id.toString()))
+        val clienteBorrado = con.delete(Aplicacion.TABLA, "dni=?", arrayOf(dni))
         con.close()
         return clienteBorrado > 0
     }
@@ -76,13 +76,13 @@ class CrudClientes {
         val con = Aplicacion.llave.writableDatabase
         val values = c.toContentValues()
         var filasActualizadas = 0
-        val q = "select id from ${Aplicacion.TABLA} where dni=? AND id <> ?"
-        val cursor = con.rawQuery(q, arrayOf(c.dni, c.id.toString()))
+        val q = "select dni from ${Aplicacion.TABLA} where dni=?"
+        val cursor = con.rawQuery(q, arrayOf(c.dni))
         val existeDni = cursor.moveToFirst()
         cursor.close()
 
         if(!existeDni){
-            filasActualizadas = con.update(Aplicacion.TABLA, values,"id=?", arrayOf(c.id.toString()))
+            filasActualizadas = con.update(Aplicacion.TABLA, values,"dni=?", arrayOf(c.dni))
         }
         con.close()
         return filasActualizadas > 0
@@ -92,9 +92,11 @@ class CrudClientes {
         return ContentValues().apply {
 
             // Las claves deben coincidir con los campos de la tabla de la base de datos
+            put("dni", dni)
             put("nombre", nombre)
             put("direccion", direccion)
-            put("dni", dni)
+            put("lesion", lesion)
+            put("tratamiento", tratamiento)
 
         }
     }

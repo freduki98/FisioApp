@@ -1,7 +1,6 @@
 package com.example.fisioapp
 
 import android.content.Intent
-import android.content.res.Resources
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -38,7 +37,7 @@ class ClientesActivity : AppCompatActivity() {
 
         setListener()
         setRecycler()
-        title = "Colección de clientes"
+        title = "Clientes"
 
     }
 
@@ -49,7 +48,7 @@ class ClientesActivity : AppCompatActivity() {
         adapter = ClienteAdapter(
             lista,
             { position -> borrarCliente(position) },
-            { position -> actualizarArticulo(position) })
+            { position -> actualizarCliente(position) })
         binding.recyclerViewClientes.adapter = adapter
 
 
@@ -57,23 +56,23 @@ class ClientesActivity : AppCompatActivity() {
 
 
     private fun borrarCliente(position: Int) {
-        val idArticulo = lista[position].id
+        val idCliente = lista[position].dni
         // Lo elimino de la lista
         lista.removeAt(position)
         // Lo elimino de la base de datos
-        if (CrudClientes().borrar(idArticulo)) {
+        if (CrudClientes().borrar(idCliente)) {
             // Notifico al adapter que se ha eliminado un elemento
             adapter.notifyItemRemoved(position)
         } else {
-            Toast.makeText(this, "No se ha podido eliminar ningun registro", Toast.LENGTH_SHORT)
+            Toast.makeText(this, "No se ha podido eliminar el cliente", Toast.LENGTH_SHORT)
                 .show()
         }
 
     }
 
-    private fun actualizarArticulo(c: ClienteModel) {
+    private fun actualizarCliente(c: ClienteModel) {
         val i = Intent(this, AddActivity::class.java).apply {
-            putExtra("articulo", c)
+            putExtra("CLIENTE", c)
         }
         startActivity(i)
 

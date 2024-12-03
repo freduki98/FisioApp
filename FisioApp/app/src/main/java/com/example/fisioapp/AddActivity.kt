@@ -16,6 +16,8 @@ class AddActivity : AppCompatActivity() {
     private var nombre = ""
     private var direccion = ""
     private var dni = ""
+    private var lesion = ""
+    private var tratamiento = ""
     private var id = -1
     var api = ""
     private var isUpdate = false
@@ -35,7 +37,7 @@ class AddActivity : AppCompatActivity() {
         }
 
         api = getString(R.string.news_api)
-        recogerArticulos()
+        recogerClientes()
         setListener()
 
         if(isUpdate){
@@ -44,16 +46,17 @@ class AddActivity : AppCompatActivity() {
         }
     }
 
-    private fun recogerArticulos() {
+    private fun recogerClientes() {
         val datos = intent.extras
         if (datos != null) {
-            val cliente = intent.getSerializableExtra("cliente") as ClienteModel
+            val cliente = intent.getSerializableExtra("CLIENTE") as ClienteModel
             isUpdate = true
 
-            id = cliente.id
+            dni = cliente.dni
             nombre = cliente.nombre
             direccion = cliente.direccion
-            dni = cliente.dni
+            lesion = cliente.dni
+            tratamiento = cliente.tratamiento
 
             pintarDatos()
         }
@@ -77,21 +80,21 @@ class AddActivity : AppCompatActivity() {
         binding.btn2Enviar.setOnClickListener {
             if(datosCorrectos()){
 
-                    val articulo = ClienteModel(id, nombre, direccion, dni)
+                    val cliente = ClienteModel(dni, nombre, direccion, lesion, tratamiento)
 
                     if (!isUpdate) {
-                        if (CrudClientes().create(articulo) != -1L) {
+                        if (CrudClientes().create(cliente) != -1L) {
                             Toast.makeText(this, "Cliente agregado", Toast.LENGTH_SHORT).show()
                             finish()
                         } else {
                             Toast.makeText(
                                 this,
-                                "No se ha podido agregar el articulo",
+                                "No se ha podido agregar el cliente",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
                     } else {
-                        if (CrudClientes().actualizar(articulo)) {
+                        if (CrudClientes().actualizar(cliente)) {
                             Toast.makeText(this, "Cliente actualizado", Toast.LENGTH_SHORT).show()
                             finish()
                         } else {
@@ -111,25 +114,23 @@ class AddActivity : AppCompatActivity() {
 
 
     private fun datosCorrectos(): Boolean {
+        dni = binding.etDni.text.toString().trim()
         nombre = binding.etNombre.text.toString().trim()
         direccion = binding.etDireccion.text.toString().trim()
+        lesion = binding.etLesion.text.toString().trim()
+        tratamiento = binding.etTratamiento.text.toString().trim()
 
-        if(binding.etDni.text.toString().trim().isEmpty()){
-            dni = ""
-        } else {
-            dni = binding.etDni.text.toString().trim()
-        }
 
-        if (nombre.isEmpty() || direccion.isEmpty() || dni.toString().trim().isEmpty()) {
+        if (nombre.isEmpty() || direccion.isEmpty() || dni.trim().isEmpty() || lesion.isEmpty() || tratamiento.isEmpty()) {
             Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
             return false
         } else if (nombre.length < 5) {
             binding.etNombre.error = "El nombre debe tener al menos 5 caracteres"
             return false
         } else if (direccion.length < 10 || direccion.length > 40) {
-            binding.etDireccion.error = "La direccion no tiene una longitud adecuada"
+            binding.etDireccion.error = "La direccion no tiene la longitud adecuada"
             return false
-        } else if (dni.length!= 9) {
+        } else if (!dni.matches(Regex("[0-9]{8}[A-Z]"))) {
             binding.etDni.error = "El dni debe ser 8 digitos y una letra mayuscula"
             return false
         }
@@ -141,6 +142,8 @@ class AddActivity : AppCompatActivity() {
         binding.etNombre.setText("")
         binding.etDireccion.setText("")
         binding.etDni.setText("")
+        binding.etLesion.setText("")
+        binding.etTratamiento.setText("")
 
     }
 }
