@@ -7,7 +7,8 @@ import com.example.fisioapp.Aplicacion
 class MyDatabase : SQLiteOpenHelper (Aplicacion.context, Aplicacion.DB, null, Aplicacion.version) {
 
     private val q = "CREATE TABLE ${Aplicacion.TABLA}(" +
-            "dni TEXT PRIMARY KEY CHECK(length(dni) == 9)," +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "dni TEXT CHECK(length(dni) == 9)," +
             "nombre TEXT NOT NULL CHECK(length(nombre) <= 40)," +
             "direccion TEXT," +
             "lesion TEXT not null," +

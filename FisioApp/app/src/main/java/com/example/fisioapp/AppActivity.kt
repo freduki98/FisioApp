@@ -70,10 +70,10 @@ class AppActivity : AppCompatActivity(), OnFragmentActionListener {
             }
             startActivity(i)
         } else if(btn == 3){
-//            val i= Intent(this, AjustesActivity::class.java).apply {
-//                putExtra("BOTONPULSADO", btn)
-//            }
-//            startActivity(i)
+            val i= Intent(this, AjustesActivity::class.java).apply {
+                putExtra("BOTONPULSADO", btn)
+            }
+            startActivity(i)
         }
     }
 

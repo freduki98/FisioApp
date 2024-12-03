@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
                 val cuenta = datos.getResult(ApiException::class.java)
                 if(cuenta != null){
                     val credenciales = GoogleAuthProvider.getCredential(cuenta.idToken, null)
+
                     // Credenciales para autenticar al usuario
                     FirebaseAuth.getInstance().signInWithCredential(credenciales)
                         .addOnCompleteListener{
@@ -45,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         if(it.resultCode == RESULT_CANCELED){
-            Toast.makeText(this, "El usuario canceló", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "El usuario canceló el inicio de sesión.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -91,22 +92,25 @@ class MainActivity : AppCompatActivity() {
             .requestEmail()
             .build()
         val googleClient = GoogleSignIn.getClient(this, googleConf)
-        googleClient.signOut() // Fundamental para que no haga login automatico si he cerrado sesion
+
+        // Fundamental para que no haga login automatico si he cerrado sesion
+        googleClient.signOut()
         responseLauncher.launch(googleClient.signInIntent)
     }
 
     private fun register() {
-        if(!datosCorrectos()) return
+        if(!datosCorrectos()) {
+            return
+        }
         auth.createUserWithEmailAndPassword(email, pass)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     Toast.makeText(this, "Usuario creado con exito", Toast.LENGTH_SHORT).show()
-                    // Si el usuario se ha creado vamos a iniciar sesion con el
                     login()
                 }
             }
             .addOnFailureListener {
-                Toast.makeText(this, it.message.toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Hubo algún herror al crear el usuario.", Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -114,23 +118,22 @@ class MainActivity : AppCompatActivity() {
         email = binding.etEmail.text.toString().trim()
 
         if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            binding.etEmail.error = "Email no valido"
+            binding.etEmail.error = "Email con formato no valido"
             return false
         }
 
         pass = binding.etPass.text.toString().trim()
-        if(pass.length < 6){
-            binding.etPass.error = "La contraseña debe tener al menos 6 caracteres"
+        if(pass.length < 8){
+            binding.etPass.error = "La contraseña debe tener al menos 8 caracteres"
             return false
         }
         return true
     }
 
     private fun login() {
-        if(!datosCorrectos()) return
-
-        // Aqui ya estan los datos validados
-
+        if(!datosCorrectos()) {
+            return
+        }
         // Vamos a logear al usuario
         auth.signInWithEmailAndPassword(email, pass)
             .addOnCompleteListener {
@@ -139,15 +142,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             .addOnFailureListener {
-                Toast.makeText(this, it.message.toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "No se pudo realizar el inicio de sesión.", Toast.LENGTH_SHORT).show()
 
             }
 
-    }
-
-    private fun limpiar() {
-        binding.etEmail.text.clear()
-        binding.etPass.text.clear()
     }
 
     private fun irActivityApp(){
@@ -156,7 +154,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart(){
 
-        // Si ya tiene la sesion iniciada
+        // Si ya tiene la sesion iniciada va directo a la siguiente activity
         super.onStart()
         val currentUser = auth.currentUser
         if(currentUser != null){

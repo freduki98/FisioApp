@@ -1,9 +1,7 @@
 package com.example.fisioapp.adapters
 
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fisioapp.R
 import com.example.fisioapp.databinding.ClienteLayoutBinding
 import com.example.fisioapp.models.ClienteModel
 
@@ -12,19 +10,21 @@ class ClienteViewHolder(v: View) : RecyclerView.ViewHolder(v) {
 
     fun render(
         c: ClienteModel,
-        borrarArticulo: (Int) -> Unit,
-        actualizarArticulo: (ClienteModel) -> Unit
+        borrarCliente: (Int) -> Unit,
+        actualizarCliente: (ClienteModel) -> Unit
     ){
-        binding.tvNombreCompleto.text = c.nombre // + "(${c.id})"
-        binding.tvDireccion.text = c.direccion
-        binding.tvDni.text = c.dni
+        binding.tvDni.text = "Dni: " + c.dni
+        binding.tvNombreCompleto.text = "Nombre: " + c.nombre
+        binding.tvDireccion.text = "Direccion: " + c.direccion
+        binding.tvLesion.text = "Lesión: " + c.lesion
+        binding.tvTratamientoActual.text = "Tratamiento: " + c.tratamiento
 
         binding.btnBorrar.setOnClickListener{
-            borrarArticulo(adapterPosition)
+            borrarCliente(adapterPosition)
         }
 
         binding.btnUpdate.setOnClickListener{
-            actualizarArticulo(c)
+            actualizarCliente(c)
         }
     }
 }

@@ -103,7 +103,7 @@ class GaleriaActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
             binding.ivCuerpo13.setImageResource(R.drawable.fuerz3)
             binding.ivCuerpo14.setImageResource(R.drawable.fuerz4)
             binding.ivCuerpo15.setImageResource(R.drawable.fuerz5)
-        } else if(ejercicio == "HIPERTROFIA MUSCULAR"){
+        } else if(ejercicio == "HIPERTROFIA"){
             binding.ivCuerpo11.setImageResource(R.drawable.hiper1)
             binding.ivCuerpo12.setImageResource(R.drawable.hiper2)
             binding.ivCuerpo13.setImageResource(R.drawable.hiper3)

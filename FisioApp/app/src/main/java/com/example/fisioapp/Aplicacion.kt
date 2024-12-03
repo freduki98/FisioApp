@@ -6,7 +6,7 @@ import com.example.fisioapp.providers.db.MyDatabase
 
 class Aplicacion : Application() {
     companion object{
-        const val version = 5
+        const val version = 6
         const val DB = "Base_clientes"
         const val TABLA = "clientes"
         lateinit var context: Context

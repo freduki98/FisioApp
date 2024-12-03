@@ -14,9 +14,6 @@ import com.example.fisioapp.R
 class MenuFragment : Fragment() {
     private  var listener: OnFragmentActionListener? = null
     private val listaImagenesView= arrayOf(R.id.iv_anuncios, R.id.iv_galeria, R.id.iv_clientes, R.id.iv_perfil)
-//    private val imagenesBotonesIluminados= arrayOf(
-//    )
-    var botonIluminado=3000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,23 +29,13 @@ class MenuFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        //Se llama cuando se ha creado la vista
-
         super.onViewCreated(view, savedInstanceState)
         var imageView: ImageView
-        if(arguments!=null){
-            botonIluminado=requireArguments().getInt("BOTONPULSADO")
-        }
+
         for(i in listaImagenesView.indices){
             imageView=view.findViewById(listaImagenesView[i])
-            if(botonIluminado==i){
-                // imageView.setImageResource(imagenesBotonesIluminados[i])
-            }
-            //ponemos el listener a todos y cada uno de los images views
-            imageView.setOnClickListener {
 
-                // Se llama cuando se pulsa una imagen del menu
+            imageView.setOnClickListener {
                 listener?.onClickImagenMenu(i)
             }
 

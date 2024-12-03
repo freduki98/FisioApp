@@ -34,7 +34,7 @@ class CrudClientes {
         try {
             val cursor = con.query(
                 Aplicacion.TABLA,
-                arrayOf("dni", "nombre", "direccion", "lesion", "tratamiento"),
+                arrayOf("id","dni", "nombre", "direccion", "lesion", "tratamiento"),
                 null,
                 null,
                 null,
@@ -42,12 +42,13 @@ class CrudClientes {
                 null
             )
             while (cursor.moveToNext()) {
-                val dni = cursor.getString(0)
-                val nombre = cursor.getString(1)
-                val direccion = cursor.getString(2)
-                val lesion = cursor.getString(3)
-                val tratamiento = cursor.getString(4)
-                val cliente = ClienteModel(dni, nombre, direccion, lesion, tratamiento)
+                val id = cursor.getInt(0)
+                val dni = cursor.getString(1)
+                val nombre = cursor.getString(2)
+                val direccion = cursor.getString(3)
+                val lesion = cursor.getString(4)
+                val tratamiento = cursor.getString(5)
+                val cliente = ClienteModel(id, dni, nombre, direccion, lesion, tratamiento)
 
                 lista.add(cliente)
             }
@@ -61,28 +62,22 @@ class CrudClientes {
 
     public fun borrar (dni: String): Boolean{
         val con = Aplicacion.llave.writableDatabase
-        val clienteBorrado = con.delete(Aplicacion.TABLA, "dni=?", arrayOf(dni))
+        val clienteBorrado = con.delete(Aplicacion.TABLA, "id=?", arrayOf(dni))
         con.close()
         return clienteBorrado > 0
-    }
-
-    public fun borrarTodo (){
-        val con = Aplicacion.llave.writableDatabase
-        con.execSQL("delete from ${Aplicacion.TABLA}")
-        con.close()
     }
 
     public fun actualizar (c: ClienteModel): Boolean{
         val con = Aplicacion.llave.writableDatabase
         val values = c.toContentValues()
         var filasActualizadas = 0
-        val q = "select dni from ${Aplicacion.TABLA} where dni=?"
-        val cursor = con.rawQuery(q, arrayOf(c.dni))
+        val q = "select id from ${Aplicacion.TABLA} where dni=? AND id <> ?"
+        val cursor = con.rawQuery(q, arrayOf(c.dni, c.id.toString()))
         val existeDni = cursor.moveToFirst()
         cursor.close()
 
         if(!existeDni){
-            filasActualizadas = con.update(Aplicacion.TABLA, values,"dni=?", arrayOf(c.dni))
+            filasActualizadas = con.update(Aplicacion.TABLA, values,"id=?", arrayOf(c.id.toString()))
         }
         con.close()
         return filasActualizadas > 0
@@ -91,7 +86,6 @@ class CrudClientes {
     private fun ClienteModel.toContentValues(): ContentValues{
         return ContentValues().apply {
 
-            // Las claves deben coincidir con los campos de la tabla de la base de datos
             put("dni", dni)
             put("nombre", nombre)
             put("direccion", direccion)

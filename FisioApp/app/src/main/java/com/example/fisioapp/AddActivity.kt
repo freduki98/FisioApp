@@ -1,6 +1,7 @@
 package com.example.fisioapp
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -12,13 +13,25 @@ import com.example.fisioapp.providers.db.CrudClientes
 
 class AddActivity : AppCompatActivity() {
 
+    val focusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
+        if (!hasFocus) {
+            comprobarProgreso()
+
+        }
+    }
+
     private lateinit var binding: ActivityAddBinding
+    private var id = 0
     private var nombre = ""
     private var direccion = ""
     private var dni = ""
     private var lesion = ""
     private var tratamiento = ""
-    private var id = -1
+    private var nombreAddProgress = false
+    private var apellidosAddProgress = false
+    private var dniAddProgress = false
+    private var lesionAddProgress = false
+    private var tratamientoAddProgress = false
     var api = ""
     private var isUpdate = false
 
@@ -36,7 +49,7 @@ class AddActivity : AppCompatActivity() {
             insets
         }
 
-        api = getString(R.string.news_api)
+        api = getString(R.string.noticias_api)
         recogerClientes()
         setListener()
 
@@ -44,6 +57,9 @@ class AddActivity : AppCompatActivity() {
             binding.etTitle2.text = "Editar cliente"
             binding.btn2Enviar.text = "Editar"
         }
+
+
+
     }
 
     private fun recogerClientes() {
@@ -52,10 +68,11 @@ class AddActivity : AppCompatActivity() {
             val cliente = intent.getSerializableExtra("CLIENTE") as ClienteModel
             isUpdate = true
 
+            id = cliente.id
             dni = cliente.dni
             nombre = cliente.nombre
             direccion = cliente.direccion
-            lesion = cliente.dni
+            lesion = cliente.lesion
             tratamiento = cliente.tratamiento
 
             pintarDatos()
@@ -66,6 +83,8 @@ class AddActivity : AppCompatActivity() {
         binding.etNombre.setText(nombre)
         binding.etDireccion.setText(direccion)
         binding.etDni.setText(dni)
+        binding.etLesion.setText(lesion)
+        binding.etTratamiento.setText(tratamiento)
     }
 
 
@@ -80,7 +99,7 @@ class AddActivity : AppCompatActivity() {
         binding.btn2Enviar.setOnClickListener {
             if(datosCorrectos()){
 
-                    val cliente = ClienteModel(dni, nombre, direccion, lesion, tratamiento)
+                    val cliente = ClienteModel(id, dni, nombre, direccion, lesion, tratamiento)
 
                     if (!isUpdate) {
                         if (CrudClientes().create(cliente) != -1L) {
@@ -89,7 +108,7 @@ class AddActivity : AppCompatActivity() {
                         } else {
                             Toast.makeText(
                                 this,
-                                "No se ha podido agregar el cliente",
+                                "El cliente ya existe.",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -107,6 +126,12 @@ class AddActivity : AppCompatActivity() {
                     }
                 }
             }
+
+            binding.etNombre.onFocusChangeListener = focusChangeListener
+            binding.etDireccion.onFocusChangeListener = focusChangeListener
+            binding.etDni.onFocusChangeListener = focusChangeListener
+            binding.etLesion.onFocusChangeListener = focusChangeListener
+            binding.etTratamiento.onFocusChangeListener = focusChangeListener
         }
 
 
@@ -146,4 +171,52 @@ class AddActivity : AppCompatActivity() {
         binding.etTratamiento.setText("")
 
     }
+
+    private fun comprobarProgreso() {
+        binding.progressBar.visibility = View.VISIBLE
+
+        dni = binding.etDni.text.toString().trim()
+        nombre = binding.etNombre.text.toString().trim()
+        direccion = binding.etDireccion.text.toString().trim()
+        lesion = binding.etLesion.text.toString().trim()
+        tratamiento = binding.etTratamiento.text.toString().trim()
+
+        if(!nombre.isEmpty() && nombre.length >= 5 && !nombreAddProgress){
+            binding.progressBar.progress += 20
+            nombreAddProgress = true
+        } else if(nombre.isEmpty() && nombre.length < 5 && nombreAddProgress){
+            binding.progressBar.progress -= 20
+        }
+        if(!direccion.isEmpty() && direccion.length >= 10 && direccion.length <= 40 && !apellidosAddProgress){
+            binding.progressBar.progress += 20
+            apellidosAddProgress = true
+        } else if(direccion.isEmpty() && (direccion.length < 10 || direccion.length > 40) && apellidosAddProgress){
+            binding.progressBar.progress -= 20
+            apellidosAddProgress = false
+        }
+        if(dni.isNotEmpty() && dni.matches(Regex("[0-9]{8}[A-Z]")) && !dniAddProgress){
+            binding.progressBar.progress += 20
+            dniAddProgress = true
+        } else if(dni.isEmpty() && !dni.matches(Regex("[0-9]{8}[A-Z]")) && dniAddProgress){
+            binding.progressBar.progress -= 20
+            dniAddProgress = false
+        }
+        if(!lesion.isEmpty() && !lesionAddProgress){
+            binding.progressBar.progress += 20
+            dniAddProgress = true
+        } else if(lesion.isEmpty() && dniAddProgress){
+            binding.progressBar.progress -= 20
+            dniAddProgress = false
+        }
+        if(!tratamiento.isEmpty() && !tratamientoAddProgress){
+            binding.progressBar.progress += 20
+            tratamientoAddProgress = true
+        } else if(tratamiento.isEmpty() && tratamientoAddProgress){
+            binding.progressBar.progress -= 20
+            tratamientoAddProgress = false
+        }
+
+    }
 }
+
+

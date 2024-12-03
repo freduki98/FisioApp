@@ -3,7 +3,7 @@ package com.example.fisioapp.models
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class NewsModel(
+data class NoticiasModel(
     @SerializedName("title") var titulo: String,
     @SerializedName("description") var descripcion: String,
     @SerializedName("urlToImage") var imagen: String,
@@ -12,5 +12,5 @@ data class NewsModel(
 ) : Serializable
 
 data class ListaNoticias(
-    @SerializedName("articles") val listaNoticiasApiNews: MutableList<NewsModel>
+    @SerializedName("articles") val listaNoticiasApiNews: MutableList<NoticiasModel>
 )

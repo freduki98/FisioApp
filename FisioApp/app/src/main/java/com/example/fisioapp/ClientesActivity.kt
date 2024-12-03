@@ -56,12 +56,9 @@ class ClientesActivity : AppCompatActivity() {
 
 
     private fun borrarCliente(position: Int) {
-        val idCliente = lista[position].dni
-        // Lo elimino de la lista
+        val idCliente = lista[position].id
         lista.removeAt(position)
-        // Lo elimino de la base de datos
-        if (CrudClientes().borrar(idCliente)) {
-            // Notifico al adapter que se ha eliminado un elemento
+        if (CrudClientes().borrar(idCliente.toString())) {
             adapter.notifyItemRemoved(position)
         } else {
             Toast.makeText(this, "No se ha podido eliminar el cliente", Toast.LENGTH_SHORT)
@@ -101,42 +98,4 @@ class ClientesActivity : AppCompatActivity() {
         setRecycler()
     }
 
-    // ----------------------------- MENU PRINCIPAL ------------------------------------//
-
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-
-        menuInflater.inflate(R.menu.menu_principal, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.item_salir -> {
-                finish()
-            }
-
-            R.id.item_borrar_todo -> {
-                confirmarBorrado()
-            }
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun confirmarBorrado() {
-        val builder = android.app.AlertDialog.Builder(this)
-            .setTitle("¿Borrar clientes?")
-            .setMessage("¿Estás seguro de que quieres borrar todos los clientes?")
-            .setPositiveButton("ACEPTAR") { _, _ ->
-                CrudClientes().borrarTodo()
-                setRecycler()
-            }
-            .setNegativeButton("CANCELAR") { dialog, _ ->
-                dialog.dismiss()
-
-            }
-            .create()
-            .show()
-    }
 }
