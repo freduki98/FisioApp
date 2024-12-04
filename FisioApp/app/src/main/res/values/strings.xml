@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">FisioApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="array_cuerpoHumano">
+        <item>SIST. ESQUELÉTICO</item>
+        <item>SIST. MUSCULAR</item>
+        <item>SIST. NERVIOSO</item>
+    </string-array>
+
+    <string-array name="array_movimientos">
+        <item>COLUMNA VERTEBRAL</item>
+        <item>MIEMBROS SUPERIORES</item>
+        <item>MIEMBROS INFERIORES</item>
+    </string-array>
+
+    <string-array name="array_ejercicios">
+        <item>CARDIOVASCULAR</item>
+        <item>FUERZA MAXIMA</item>
+        <item>HIPERTROFIA</item>
+    </string-array>
+</resources>

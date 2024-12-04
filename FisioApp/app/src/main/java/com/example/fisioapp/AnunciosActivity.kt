@@ -37,28 +37,10 @@ class AnunciosActivity : AppCompatActivity() {
             insets
         }
 
-        setListeners()
         api = getString(R.string.noticias_api)
         setRecycler()
         traerNoticias("fisioterapia")
-        Toast.makeText(this, "Noticias sobre Fisioterapia por defecto", Toast.LENGTH_SHORT).show()
 
-    }
-
-    private fun setListeners() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?) : Boolean {
-                val buscado = query.toString().trim().lowercase()
-                if(buscado.isNotEmpty()){
-                    traerNoticias(buscado)
-                }
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return true
-            }
-        })
     }
 
     private fun traerNoticias(query: String) {

@@ -28,15 +28,26 @@ class CrudClientes {
 
     }
 
-    fun read(): MutableList<ClienteModel> {
+
+    fun read(nombreCliente: String): MutableList<ClienteModel> {
         val lista = mutableListOf<ClienteModel>()
         val con = Aplicacion.llave.readableDatabase
+
+        val nombreCli = nombreCliente;
+        var selection: String? = null
+        var selectionArgs: Array<String>? = null
+
+        if(nombreCli != ""){
+            selection = "nombre like ?"
+            selectionArgs = arrayOf("%$nombreCli%")
+        }
+
         try {
             val cursor = con.query(
                 Aplicacion.TABLA,
                 arrayOf("id","dni", "nombre", "direccion", "lesion", "tratamiento"),
-                null,
-                null,
+                selection,
+                selectionArgs,
                 null,
                 null,
                 null
