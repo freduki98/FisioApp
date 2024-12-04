@@ -9,7 +9,7 @@ import com.example.fisioapp.models.NoticiasModel
 class NoticiasAdapter(var lista: MutableList<NoticiasModel>): RecyclerView.Adapter<NoticiasViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoticiasViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.news_api_layout, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.noticias_api_layout, parent, false)
         return NoticiasViewHolder(v)
     }
 

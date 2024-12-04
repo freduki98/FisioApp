@@ -16,7 +16,6 @@ class AddActivity : AppCompatActivity() {
     val focusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
         if (!hasFocus) {
             comprobarProgreso()
-
         }
     }
 
@@ -92,10 +91,6 @@ class AddActivity : AppCompatActivity() {
         binding.btnCancelar.setOnClickListener {
             finish()
         }
-
-        binding.btn2Reset.setOnClickListener {
-            limpiar()
-        }
         binding.btn2Enviar.setOnClickListener {
             if(datosCorrectos()){
 
@@ -124,6 +119,8 @@ class AddActivity : AppCompatActivity() {
                             ).show()
                         }
                     }
+
+                comprobarProgreso()
                 }
             }
 
@@ -163,14 +160,6 @@ class AddActivity : AppCompatActivity() {
         return true
     }
 
-    private fun limpiar() {
-        binding.etNombre.setText("")
-        binding.etDireccion.setText("")
-        binding.etDni.setText("")
-        binding.etLesion.setText("")
-        binding.etTratamiento.setText("")
-
-    }
 
     private fun comprobarProgreso() {
         binding.progressBar.visibility = View.VISIBLE
@@ -184,34 +173,40 @@ class AddActivity : AppCompatActivity() {
         if(!nombre.isEmpty() && nombre.length >= 5 && !nombreAddProgress){
             binding.progressBar.progress += 20
             nombreAddProgress = true
-        } else if(nombre.isEmpty() && nombre.length < 5 && nombreAddProgress){
+        }
+        if((nombre.isEmpty() || nombre.length < 5) && nombreAddProgress){
             binding.progressBar.progress -= 20
+            nombreAddProgress = false
         }
         if(!direccion.isEmpty() && direccion.length >= 10 && direccion.length <= 40 && !apellidosAddProgress){
             binding.progressBar.progress += 20
             apellidosAddProgress = true
-        } else if(direccion.isEmpty() && (direccion.length < 10 || direccion.length > 40) && apellidosAddProgress){
+        }
+        if((direccion.isEmpty() || (direccion.length < 10 || direccion.length > 40)) && apellidosAddProgress){
             binding.progressBar.progress -= 20
             apellidosAddProgress = false
         }
-        if(dni.isNotEmpty() && dni.matches(Regex("[0-9]{8}[A-Z]")) && !dniAddProgress){
+        if(!dni.isEmpty() && dni.matches(Regex("[0-9]{8}[A-Z]")) && !dniAddProgress){
             binding.progressBar.progress += 20
             dniAddProgress = true
-        } else if(dni.isEmpty() && !dni.matches(Regex("[0-9]{8}[A-Z]")) && dniAddProgress){
+        }
+        if((dni.isEmpty() || !dni.matches(Regex("[0-9]{8}[A-Z]"))) && dniAddProgress){
             binding.progressBar.progress -= 20
             dniAddProgress = false
         }
         if(!lesion.isEmpty() && !lesionAddProgress){
             binding.progressBar.progress += 20
-            dniAddProgress = true
-        } else if(lesion.isEmpty() && dniAddProgress){
+            lesionAddProgress = true
+        }
+        if(lesion.isEmpty() && lesionAddProgress){
             binding.progressBar.progress -= 20
-            dniAddProgress = false
+            lesionAddProgress = false
         }
         if(!tratamiento.isEmpty() && !tratamientoAddProgress){
             binding.progressBar.progress += 20
             tratamientoAddProgress = true
-        } else if(tratamiento.isEmpty() && tratamientoAddProgress){
+        }
+        if(tratamiento.isEmpty() && tratamientoAddProgress){
             binding.progressBar.progress -= 20
             tratamientoAddProgress = false
         }

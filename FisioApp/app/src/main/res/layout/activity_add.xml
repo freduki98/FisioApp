@@ -16,13 +16,13 @@
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_dni" />
+        app:layout_constraintTop_toBottomOf="@+id/etDni" />
 
     <EditText
         android:id="@+id/et_nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
         android:hint="Nombre..."
         android:inputType="textPersonName"
@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_title2" />
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
     <EditText
         android:id="@+id/et_direccion"
@@ -50,28 +50,13 @@
         android:id="@+id/btn2_enviar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="61dp"
+        android:layout_marginTop="52dp"
         android:backgroundTint="#66BB6A"
         android:text="Guardar"
         app:layout_constraintEnd_toStartOf="@+id/btn_cancelar"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
-
-    <Button
-        android:id="@+id/btn2_reset"
-        android:layout_width="32dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@android:color/holo_orange_light"
-        android:text="Limpiar"
-        app:icon="@android:drawable/ic_menu_revert"
-        app:iconGravity="top"
-        app:iconSize="20sp"
-        app:iconTint="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/etTratamiento" />
 
     <TextView
         android:id="@+id/et_title2"
@@ -129,7 +114,7 @@
         android:layout_width="228dp"
         android:layout_height="15dp"
         android:layout_marginStart="126dp"
-        android:layout_marginTop="58dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="126dp"
         android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
         android:max="100"
@@ -138,10 +123,10 @@
         android:progressDrawable="@android:drawable/progress_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTratamiento" />
+        app:layout_constraintTop_toBottomOf="@+id/et_title2" />
 
     <EditText
-        android:id="@+id/et_dni"
+        android:id="@+id/etDni"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

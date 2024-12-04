@@ -8,58 +8,152 @@
     tools:context=".AjustesActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_titulo_perfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="178dp"
-        tools:layout_editor_absoluteY="21dp" />
+        android:layout_marginStart="178dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="175dp"
+        android:text="AJUSTES"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/tv_nombre_perfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="67dp" />
-
-    <RadioButton
-        android:id="@+id/radioButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="RadioButton"
-        tools:layout_editor_absoluteX="82dp"
-        tools:layout_editor_absoluteY="183dp" />
-
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CheckBox"
-        tools:layout_editor_absoluteX="140dp"
-        tools:layout_editor_absoluteY="247dp" />
+        android:layout_marginTop="40dp"
+        android:text="Nombre"
+        app:layout_constraintEnd_toStartOf="@+id/et_nombre_perfil"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_titulo_perfil" />
 
     <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="128dp"
-        tools:layout_editor_absoluteY="155dp" />
+        android:layout_width="274dp"
+        android:layout_height="60dp"
+        tools:layout_editor_absoluteX="72dp"
+        tools:layout_editor_absoluteY="244dp" />
 
     <RadioButton
-        android:id="@+id/radioButton2"
+        android:id="@+id/rb_mujer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RadioButton"
-        tools:layout_editor_absoluteX="212dp"
-        tools:layout_editor_absoluteY="183dp" />
+        android:text="Mujer"
+        app:layout_constraintBottom_toBottomOf="@+id/rb_hombre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/rb_hombre"
+        app:layout_constraintTop_toTopOf="@+id/rb_hombre" />
+
+    <TextView
+        android:id="@+id/tv_genero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Genero"
+        app:layout_constraintStart_toStartOf="@+id/tv_domicilio"
+        app:layout_constraintTop_toBottomOf="@+id/tv_domicilio" />
+
+    <TextView
+        android:id="@+id/tv_edad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Edad"
+        app:layout_constraintStart_toStartOf="@+id/tv_genero"
+        app:layout_constraintTop_toBottomOf="@+id/rb_hombre" />
+
+    <RadioButton
+        android:id="@+id/rb_hombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Hombre"
+        app:layout_constraintEnd_toStartOf="@+id/rb_mujer"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_genero" />
+
+    <CheckBox
+        android:id="@+id/cb_confirm_saludoBienvenida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="¿Quiere recibir un saludo en la pagina principal?"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sb_edad" />
 
     <SeekBar
-        android:id="@+id/seekBar"
+        android:id="@+id/sb_edad"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="165dp"
+        android:layout_height="19dp"
+        android:layout_marginTop="20dp"
         android:max="10"
         android:progress="3"
-        tools:layout_editor_absoluteX="178dp"
-        tools:layout_editor_absoluteY="375dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_edad" />
+
+    <TextView
+        android:id="@+id/tv_domicilio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="Domicilio"
+        app:layout_constraintStart_toStartOf="@+id/tv_nombre_perfil"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nombre_perfil" />
+
+    <EditText
+        android:id="@+id/et_nombre_perfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_nombre_perfil"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_nombre_perfil"
+        app:layout_constraintTop_toTopOf="@+id/tv_nombre_perfil" />
+
+    <EditText
+        android:id="@+id/et_domicilio"
+        android:layout_width="209dp"
+        android:layout_height="42dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_domicilio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_domicilio"
+        app:layout_constraintTop_toTopOf="@+id/tv_domicilio" />
+
+    <Button
+        android:id="@+id/btn_ubicacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:backgroundTint="#FF5722"
+        android:text="Mostrar ubicación"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_guardarDatos" />
+
+    <Button
+        android:id="@+id/btn_guardarDatos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:text="Guardar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cb_confirm_saludoBienvenida" />
 </androidx.constraintlayout.widget.ConstraintLayout>

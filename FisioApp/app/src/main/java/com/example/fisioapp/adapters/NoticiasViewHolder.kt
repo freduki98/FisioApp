@@ -2,12 +2,12 @@ package com.example.fisioapp.adapters
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fisioapp.databinding.NewsApiLayoutBinding
+import com.example.fisioapp.databinding.NoticiasApiLayoutBinding
 import com.example.fisioapp.models.NoticiasModel
 import com.squareup.picasso.Picasso
 
 class NoticiasViewHolder(v: View):RecyclerView.ViewHolder(v) {
-    val binding = NewsApiLayoutBinding.bind(v)
+    val binding = NoticiasApiLayoutBinding.bind(v)
 
     fun render (noticia: NoticiasModel){
         binding.tvTitulo.text = noticia.titulo
