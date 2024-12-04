@@ -1,30 +1,37 @@
 package com.example.fisioapp.fragments
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import com.example.fisioapp.OnFragmentActionListener
+import com.example.fisioapp.AjustesActivity
+import com.example.fisioapp.NoticiasActivity
+import com.example.fisioapp.ClientesActivity
+import com.example.fisioapp.GaleriaActivity
 import com.example.fisioapp.R
 
 
 class MenuFragment : Fragment() {
-    private  var listener: OnFragmentActionListener? = null
     private val listaImagenesView= arrayOf(R.id.iv_anuncios, R.id.iv_galeria, R.id.iv_clientes, R.id.iv_perfil)
+    private val listaImagenesSeleccionado= arrayOf(R.drawable.noticias_boton_seleccionado, R.drawable.galeria_boton_seleccionado, R.drawable.clientes_boton_seleccionado, R.drawable.ajustes_boton_seleccionado)
+    private val listaActivities= arrayOf(
+        NoticiasActivity::class.java,
+        GaleriaActivity::class.java,
+        ClientesActivity::class.java,
+        AjustesActivity::class.java)
+
+    private var botonPulsado = 1000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        botonPulsado = arguments?.getInt("BOTONPULSADO")?: -1
 
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_menu, container, false)
     }
 
@@ -35,23 +42,19 @@ class MenuFragment : Fragment() {
         for(i in listaImagenesView.indices){
             imageView=view.findViewById(listaImagenesView[i])
 
+            if(i == botonPulsado){
+                imageView.setBackgroundResource(listaImagenesSeleccionado[i])
+            }
+
             imageView.setOnClickListener {
-                listener?.onClickImagenMenu(i)
+
+                startActivity(Intent(activity, listaActivities[i]).apply {
+                    putExtra("BOTONPULSADO", i) }
+                )
+
             }
 
         }
-    }
-
-    override fun onAttach(context: Context) {
-        //se llama cuando se vincule el fragment con el activity
-        super.onAttach(context)
-        if(context is OnFragmentActionListener) listener=context
-    }
-
-    override fun onDetach() {
-        // Se llama cuando se desvincula el fragment del activity
-        super.onDetach()
-        listener=null
     }
 
 

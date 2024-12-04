@@ -9,7 +9,6 @@ import com.squareup.picasso.Picasso
 class NoticiasViewHolder(v: View):RecyclerView.ViewHolder(v) {
     val binding = NewsApiLayoutBinding.bind(v)
 
-    // fun render (noticia: NewsModel, onItemClick: (NewsModel) -> Unit){
     fun render (noticia: NoticiasModel){
         binding.tvTitulo.text = noticia.titulo
         binding.tvDescripcion.text = noticia.descripcion

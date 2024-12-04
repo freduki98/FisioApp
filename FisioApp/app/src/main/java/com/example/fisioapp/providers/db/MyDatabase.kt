@@ -8,9 +8,9 @@ class MyDatabase : SQLiteOpenHelper (Aplicacion.context, Aplicacion.DB, null, Ap
 
     private val q = "CREATE TABLE ${Aplicacion.TABLA}(" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-            "dni TEXT CHECK(length(dni) == 9)," +
-            "nombre TEXT NOT NULL CHECK(length(nombre) <= 40)," +
-            "direccion TEXT," +
+            "dni TEXT UNIQUE NOT NULL," +
+            "nombre TEXT NOT NULL," +
+            "direccion TEXT not null," +
             "lesion TEXT not null," +
             "tratamiento TEXT not null);"
 

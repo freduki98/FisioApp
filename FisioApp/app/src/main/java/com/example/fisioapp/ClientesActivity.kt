@@ -1,5 +1,6 @@
 package com.example.fisioapp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -9,9 +10,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fisioapp.adapters.ClienteAdapter
 import com.example.fisioapp.databinding.ActivityClienteBinding
+import com.example.fisioapp.fragments.MenuFragment
 import com.example.fisioapp.models.ClienteModel
 import com.example.fisioapp.providers.db.CrudClientes
 
@@ -21,7 +24,8 @@ class ClientesActivity : AppCompatActivity() {
     private var lista = mutableListOf<ClienteModel>()
     lateinit var adapter: ClienteAdapter
 
-    private var context = this
+    private val bundle = Bundle()
+    private lateinit var fragment : MenuFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,57 +40,13 @@ class ClientesActivity : AppCompatActivity() {
             insets
         }
 
+        Toast.makeText(this, "Activity Clientes", Toast.LENGTH_SHORT).show()
+
         setListener()
         setRecycler("")
-        title = "Clientes"
-
-    }
-
-    private fun setRecycler(nombre: String) {
-        var layoutManager = LinearLayoutManager(context)
-        binding.recyclerViewClientes.layoutManager = layoutManager
-        traerRegistros(nombre)
-        adapter = ClienteAdapter(
-            lista,
-            { position -> borrarCliente(position) },
-            { position -> actualizarCliente(position) })
-        binding.recyclerViewClientes.adapter = adapter
-
-
-    }
-
-
-    private fun borrarCliente(position: Int) {
-        val idCliente = lista[position].id
-        lista.removeAt(position)
-        if (CrudClientes().borrar(idCliente.toString())) {
-            Toast.makeText(this, "Se eliminó con exito el cliente", Toast.LENGTH_SHORT)
-                .show()
-            adapter.notifyItemRemoved(position)
-        } else {
-            Toast.makeText(this, "No se ha podido eliminar el cliente", Toast.LENGTH_SHORT)
-                .show()
-        }
-
-    }
-
-    private fun actualizarCliente(c: ClienteModel) {
-        val i = Intent(this, AddActivity::class.java).apply {
-            putExtra("CLIENTE", c)
-        }
-        startActivity(i)
-
-
-    }
-
-    private fun traerRegistros(nombre: String) {
-
-        lista = CrudClientes().read(nombre)
-            if (lista.size > 0) {
-                binding.ivClientes.visibility = View.INVISIBLE
-            } else {
-                binding.ivClientes.visibility = View.VISIBLE
-            }
+        recogerBotonPulsado()
+        initializeFragment()
+        cargarFragment(fragment)
     }
 
     private fun setListener() {
@@ -109,7 +69,68 @@ class ClientesActivity : AppCompatActivity() {
         })
     }
 
+    private fun setRecycler(nombre: String) {
+        var layoutManager = LinearLayoutManager(this)
+        binding.recyclerViewClientes.layoutManager = layoutManager
+        traerRegistros(nombre)
+        adapter = ClienteAdapter(
+            lista,
+            { position -> borrarCliente(position) },
+            { position -> actualizarCliente(position) })
+        binding.recyclerViewClientes.adapter = adapter
+    }
 
+    private fun traerRegistros(nombre: String) {
+
+        lista = CrudClientes().read(nombre)
+        if (lista.size > 0) {
+            binding.ivClientes.visibility = View.INVISIBLE
+        } else {
+            binding.ivClientes.visibility = View.VISIBLE
+        }
+    }
+
+    private fun borrarCliente(position: Int) {
+        val idCliente = lista[position].id
+        lista.removeAt(position)
+        if (CrudClientes().borrar(idCliente.toString())) {
+            Toast.makeText(this, "Se eliminó con exito el cliente", Toast.LENGTH_SHORT)
+                .show()
+            adapter.notifyItemRemoved(position)
+        } else {
+            Toast.makeText(this, "No se ha podido eliminar el cliente", Toast.LENGTH_SHORT)
+                .show()
+        }
+
+    }
+
+    private fun actualizarCliente(c: ClienteModel) {
+        val i = Intent(this, AddActivity::class.java).apply {
+            putExtra("CLIENTE", c)
+        }
+        startActivity(i)
+    }
+
+    private fun recogerBotonPulsado() {
+        val datos = intent.extras
+        if(datos != null){
+            val botonPulsado = datos.getInt("BOTONPULSADO")
+            bundle.putInt("BOTONPULSADO", botonPulsado)
+        }
+    }
+
+    private fun initializeFragment() {
+        fragment = MenuFragment().apply {
+            arguments = bundle
+        }
+    }
+
+    private fun cargarFragment(fg: MenuFragment) {
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace(R.id.fcv_menu_galeria, fg)
+        }
+    }
 
     override fun onRestart() {
         super.onRestart()

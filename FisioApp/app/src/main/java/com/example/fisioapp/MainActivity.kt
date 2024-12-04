@@ -20,6 +20,7 @@ import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
+    // Para iniciar sesion con google
     private var responseLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if(it.resultCode == RESULT_OK){
             val datos = GoogleSignIn.getSignedInAccountFromIntent(it.data)
@@ -93,7 +94,7 @@ class MainActivity : AppCompatActivity() {
             .build()
         val googleClient = GoogleSignIn.getClient(this, googleConf)
 
-        // Fundamental para que no haga login automatico si he cerrado sesion
+        // Para que no haga login automatico si he cerrado sesion
         googleClient.signOut()
         responseLauncher.launch(googleClient.signInIntent)
     }
@@ -115,8 +116,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun datosCorrectos(): Boolean {
-        email = binding.etEmail.text.toString().trim()
 
+        email = binding.etEmail.text.toString().trim()
         if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             binding.etEmail.error = "Email con formato no valido"
             return false

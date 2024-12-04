@@ -28,7 +28,7 @@
             android:name=".ClientesActivity"
             android:exported="false"/>
         <activity
-            android:name=".AnunciosActivity"
+            android:name=".NoticiasActivity"
             android:exported="false" />
         <activity
             android:name=".AppActivity"

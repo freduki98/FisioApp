@@ -7,11 +7,8 @@ import com.example.fisioapp.R
 import com.example.fisioapp.models.ClienteModel
 
 class ClienteAdapter(
-    var lista: MutableList<ClienteModel>,
-    private val borrarCliente: (Int) -> Unit,
-    private val actualizarCliente: (ClienteModel) -> Unit
-):
-    RecyclerView.Adapter<ClienteViewHolder>() {
+    var lista: MutableList<ClienteModel>, private val borrarCliente: (Int) -> Unit, private val actualizarCliente: (ClienteModel) -> Unit): RecyclerView.Adapter<ClienteViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClienteViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.cliente_layout, parent, false)
         return ClienteViewHolder(v)

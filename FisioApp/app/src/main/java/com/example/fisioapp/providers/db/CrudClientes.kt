@@ -8,10 +8,9 @@ import com.example.fisioapp.models.ClienteModel
 class CrudClientes {
     fun create (c: ClienteModel): Long{
 
-        val con = Aplicacion.llave.writableDatabase // Abrimos la base de datos en modo escritura
+        val con = Aplicacion.llave.writableDatabase
 
         return try {
-            // Insertamos el cliente en la base de datos
             con.insertWithOnConflict(
                 Aplicacion.TABLA,
                 null,
@@ -31,8 +30,10 @@ class CrudClientes {
 
     fun read(nombreCliente: String): MutableList<ClienteModel> {
         val lista = mutableListOf<ClienteModel>()
+
         val con = Aplicacion.llave.readableDatabase
 
+        // Variables para la consulta
         val nombreCli = nombreCliente;
         var selection: String? = null
         var selectionArgs: Array<String>? = null

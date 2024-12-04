@@ -7,9 +7,10 @@ import retrofit2.http.Query
 interface InterfazNoticias {
     @GET("v2/everything/")
 
-    // Hay que utilizar el suspend cuando se quiera hacer un hilo secundario a la app principal para que se realice "por detras"
+    // Se utiliza suspend para que se pueda ejecutar en un hilo separado
     suspend fun recuperarNoticias(
         @Query("q") query: String,
+        @Query("language") language: String,
         @Query("apiKey") apiKey: String
     ) : retrofit2.Response<ListaNoticias>
 }

@@ -1,11 +1,12 @@
 package com.example.fisioapp
 
-import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.example.fisioapp.databinding.ActivityAppBinding
 import com.example.fisioapp.fragments.MenuFragment
@@ -13,10 +14,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class AppActivity : AppCompatActivity(), OnFragmentActionListener {
+class AppActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityAppBinding
     private lateinit var auth : FirebaseAuth
+    var fragment = MenuFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,10 +30,13 @@ class AppActivity : AppCompatActivity(), OnFragmentActionListener {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        Toast.makeText(this, "HOME", Toast.LENGTH_SHORT).show()
+
         auth = Firebase.auth
         binding.tvEmail.text = auth.currentUser?.email.toString()
         setListeners()
-        cargarFragments()
+        cargarFragment(fragment)
     }
 
     private fun setListeners() {
@@ -45,35 +50,11 @@ class AppActivity : AppCompatActivity(), OnFragmentActionListener {
 
     }
 
-    private fun cargarFragments() {
+    private fun cargarFragment(fg: Fragment) {
         val fgMenu= MenuFragment()
         supportFragmentManager.commit {
             setReorderingAllowed(true)
-            add(R.id.fcv_menu, fgMenu)
-        }
-    }
-
-    override fun onClickImagenMenu(btn: Int) {
-        if(btn == 0) {
-            val i = Intent(this, AnunciosActivity::class.java).apply {
-                putExtra("BOTONPULSADO", btn)
-            }
-            startActivity(i)
-        } else if(btn == 1){
-            val i= Intent(this, GaleriaActivity::class.java).apply {
-                putExtra("BOTONPULSADO", btn)
-            }
-            startActivity(i)
-        } else if(btn == 2){
-            val i= Intent(this, ClientesActivity::class.java).apply {
-                putExtra("BOTONPULSADO", btn)
-            }
-            startActivity(i)
-        } else if(btn == 3){
-            val i= Intent(this, AjustesActivity::class.java).apply {
-                putExtra("BOTONPULSADO", btn)
-            }
-            startActivity(i)
+            replace(R.id.fcv_menu, fgMenu)
         }
     }
 

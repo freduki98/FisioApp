@@ -4,15 +4,21 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.commit
 import com.example.fisioapp.databinding.ActivityGaleriaBinding
+import com.example.fisioapp.fragments.MenuFragment
 
 class GaleriaActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     private lateinit var binding: ActivityGaleriaBinding
+
+    private lateinit var fragment : MenuFragment
+    private val bundle = Bundle()
 
     private lateinit var adapterCuerpo: ArrayAdapter<CharSequence>
     private lateinit var adapterMovimientos: ArrayAdapter<CharSequence>
@@ -21,7 +27,6 @@ class GaleriaActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
     private var  cuerpoHumano = ""
     private var  movimiento = ""
     private var  ejercicio = ""
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +39,8 @@ class GaleriaActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        Toast.makeText(this, "Activity Galería", Toast.LENGTH_SHORT).show()
 
 
         adapterCuerpo = ArrayAdapter.createFromResource(
@@ -56,6 +63,9 @@ class GaleriaActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
         binding.spGaleriaEjercicios.adapter = adapterEjercicios
 
         setListeners()
+        recogerBotonPulsado()
+        inicializarFragment()
+        cargarFragment(fragment)
 
     }
 
@@ -69,24 +79,35 @@ class GaleriaActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
         when(p0?.id){
             R.id.sp_galeria_cuerpoHumano -> {
-                if (p0 != null) {
-                    cuerpoHumano = p0.getItemAtPosition(p2).toString()
-                    pintarGaleriaCuerpoHumano()
-                }
+                cuerpoHumano = p0.getItemAtPosition(p2).toString()
+                pintarGaleriaCuerpoHumano()
             }
             R.id.sp_galeria_movimientos -> {
-                if (p0 != null) {
-                    movimiento = p0.getItemAtPosition(p2).toString()
-                    pintarGaleriaMovimientos()
-                }
+                movimiento = p0.getItemAtPosition(p2).toString()
+                pintarGaleriaMovimientos()
             }
             R.id.sp_galeria_ejercicios -> {
-                if (p0 != null) {
-                    ejercicio = p0.getItemAtPosition(p2).toString()
-                    pintarGaleriaEjercicios()
-                }
+                ejercicio = p0.getItemAtPosition(p2).toString()
+                pintarGaleriaEjercicios()
             }
 
+        }
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+    }
+
+    private fun recogerBotonPulsado() {
+        val datos = intent.extras
+        if(datos != null){
+            val botonPulsado = datos.getInt("BOTONPULSADO")
+            bundle.putInt("BOTONPULSADO", botonPulsado)
+        }
+    }
+
+    private fun inicializarFragment() {
+        fragment = MenuFragment().apply {
+            arguments = bundle
         }
     }
 
@@ -156,7 +177,11 @@ class GaleriaActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
         }
     }
 
-    override fun onNothingSelected(p0: AdapterView<*>?) {
+    private fun cargarFragment(fg: MenuFragment) {
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace(R.id.fcv_menu_galeria, fg)
+        }
     }
 
 }
