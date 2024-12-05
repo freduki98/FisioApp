@@ -20,6 +20,9 @@ gson = "2.10.1"
 picasso = "2.8"
 retrofit = "(2.11.0)"
 
+playServicesMaps = "19.0.0"
+swiperefreshlayout = "1.1.0"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -38,6 +41,9 @@ converter-gson-v290 = { module = "com.squareup.retrofit2:converter-gson", versio
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+
+play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
+androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

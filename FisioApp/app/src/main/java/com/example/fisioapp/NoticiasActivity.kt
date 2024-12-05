@@ -1,5 +1,6 @@
 package com.example.fisioapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -23,7 +24,7 @@ class NoticiasActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAnunciosBinding
 
     private var lista= mutableListOf<NoticiasModel>()
-    var adapter = NoticiasAdapter(lista)
+    var adapter = NoticiasAdapter(lista) { noticia -> irWebNoticia (noticia) }
 
     var api = ""
 
@@ -103,6 +104,12 @@ class NoticiasActivity : AppCompatActivity() {
             setReorderingAllowed(true)
             replace(R.id.fcv_menu_anuncios, fg)
         }
+    }
+
+    private fun irWebNoticia(noticia: NoticiasModel) {
+        val intent = Intent(this, WebNoticiaActivity::class.java)
+        intent.putExtra("URL", noticia.enlace)
+        startActivity(intent)
     }
 
 

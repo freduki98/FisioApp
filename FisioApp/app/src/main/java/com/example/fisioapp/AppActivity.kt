@@ -10,15 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.example.fisioapp.databinding.ActivityAppBinding
 import com.example.fisioapp.fragments.MenuFragment
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class AppActivity : AppCompatActivity() {
 
+
     private lateinit var binding : ActivityAppBinding
-    private lateinit var auth : FirebaseAuth
     var fragment = MenuFragment()
+    private val bundle = Bundle()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,28 +31,31 @@ class AppActivity : AppCompatActivity() {
 
         Toast.makeText(this, "HOME", Toast.LENGTH_SHORT).show()
 
-        auth = Firebase.auth
-        binding.tvEmail.text = auth.currentUser?.email.toString()
-        setListeners()
+        recogerBotonPulsado()
+        inicializarFragment()
         cargarFragment(fragment)
     }
 
-    private fun setListeners() {
-        binding.btnLogout.setOnClickListener {
-            auth.signOut()
-            finish()
+    private fun recogerBotonPulsado() {
+        val datos = intent.extras
+        if(datos != null){
+            val botonPulsado = datos.getInt("BOTONPULSADO")
+            bundle.putInt("BOTONPULSADO", botonPulsado)
+        } else {
+            bundle.putInt("BOTONPULSADO", 2)
         }
-        binding.btnSalir.setOnClickListener {
-            finishAffinity()
-        }
+    }
 
+    private fun inicializarFragment() {
+        fragment = MenuFragment().apply {
+            arguments = bundle
+        }
     }
 
     private fun cargarFragment(fg: Fragment) {
-        val fgMenu= MenuFragment()
         supportFragmentManager.commit {
             setReorderingAllowed(true)
-            replace(R.id.fcv_menu, fgMenu)
+            replace(R.id.fcv_menu, fg)
         }
     }
 

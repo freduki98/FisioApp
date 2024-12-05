@@ -9,14 +9,12 @@
         android:id="@+id/iv_anuncios"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/noticias_boton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/iv_galeria"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.991"
-        android:background="@drawable/noticias_boton" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/iv_galeria"
@@ -24,21 +22,32 @@
         android:layout_height="40dp"
         android:background="@drawable/galeria_boton"
         app:layout_constraintBottom_toBottomOf="@+id/iv_anuncios"
-        app:layout_constraintEnd_toStartOf="@+id/iv_clientes"
+        app:layout_constraintEnd_toStartOf="@+id/iv_home"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/iv_anuncios"
         app:layout_constraintTop_toTopOf="@+id/iv_anuncios" />
+
+    <ImageView
+        android:id="@+id/iv_home"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/home_boton"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_galeria"
+        app:layout_constraintEnd_toStartOf="@+id/iv_clientes"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_galeria"
+        app:layout_constraintTop_toTopOf="@+id/iv_galeria" />
 
     <ImageView
         android:id="@+id/iv_clientes"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/clientes_boton"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_galeria"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_home"
         app:layout_constraintEnd_toStartOf="@+id/iv_perfil"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/iv_galeria"
-        app:layout_constraintTop_toTopOf="@+id/iv_galeria" />
+        app:layout_constraintStart_toEndOf="@+id/iv_home"
+        app:layout_constraintTop_toTopOf="@+id/iv_home" />
 
     <ImageView
         android:id="@+id/iv_perfil"
@@ -50,4 +59,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/iv_clientes"
         app:layout_constraintTop_toTopOf="@+id/iv_clientes" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

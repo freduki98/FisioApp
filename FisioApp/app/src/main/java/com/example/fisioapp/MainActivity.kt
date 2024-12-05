@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Hubo algún herror al crear el usuario.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Hubo algún error al crear el usuario.", Toast.LENGTH_SHORT).show()
             }
     }
 

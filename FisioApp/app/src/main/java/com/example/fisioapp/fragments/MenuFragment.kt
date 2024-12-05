@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.example.fisioapp.AjustesActivity
+import com.example.fisioapp.AppActivity
 import com.example.fisioapp.NoticiasActivity
 import com.example.fisioapp.ClientesActivity
 import com.example.fisioapp.GaleriaActivity
@@ -15,15 +16,17 @@ import com.example.fisioapp.R
 
 
 class MenuFragment : Fragment() {
-    private val listaImagenesView= arrayOf(R.id.iv_anuncios, R.id.iv_galeria, R.id.iv_clientes, R.id.iv_perfil)
-    private val listaImagenesSeleccionado= arrayOf(R.drawable.noticias_boton_seleccionado, R.drawable.galeria_boton_seleccionado, R.drawable.clientes_boton_seleccionado, R.drawable.ajustes_boton_seleccionado)
+    private val listaImagenesView= arrayOf(R.id.iv_anuncios, R.id.iv_galeria, R.id.iv_home , R.id.iv_clientes, R.id.iv_perfil)
+    private val listaImagenesSeleccionado= arrayOf(R.drawable.noticias_boton_seleccionado, R.drawable.galeria_boton_seleccionado, R.drawable.home_boton_seleccionado ,R.drawable.clientes_boton_seleccionado, R.drawable.ajustes_boton_seleccionado)
     private val listaActivities= arrayOf(
         NoticiasActivity::class.java,
         GaleriaActivity::class.java,
+        AppActivity::class.java,
         ClientesActivity::class.java,
         AjustesActivity::class.java)
 
     private var botonPulsado = 1000
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,8 +52,8 @@ class MenuFragment : Fragment() {
             imageView.setOnClickListener {
 
                 startActivity(Intent(activity, listaActivities[i]).apply {
-                    putExtra("BOTONPULSADO", i) }
-                )
+                    putExtra("BOTONPULSADO", i)
+                })
 
             }
 
