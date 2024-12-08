@@ -147,11 +147,11 @@ class GaleriaActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
             binding.ivCuerpo9.setImageResource(R.drawable.mov4)
             binding.ivCuerpo10.setImageResource(R.drawable.mov5)
         } else if(movimiento == "MIEMBROS INFERIORES"){
-            binding.ivCuerpo6.setImageResource(R.drawable.cad1)
-            binding.ivCuerpo7.setImageResource(R.drawable.cad2)
-            binding.ivCuerpo8.setImageResource(R.drawable.cad3)
-            binding.ivCuerpo9.setImageResource(R.drawable.cad4)
-            binding.ivCuerpo10.setImageResource(R.drawable.cad5)
+            binding.ivCuerpo6.setImageResource(R.drawable.piern1)
+            binding.ivCuerpo7.setImageResource(R.drawable.piern2)
+            binding.ivCuerpo8.setImageResource(R.drawable.piern3)
+            binding.ivCuerpo9.setImageResource(R.drawable.piern4)
+            binding.ivCuerpo10.setImageResource(R.drawable.piern5)
         }
     }
 

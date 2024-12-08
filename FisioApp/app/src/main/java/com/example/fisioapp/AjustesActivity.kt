@@ -37,6 +37,8 @@ class AjustesActivity : AppCompatActivity(),  SeekBar.OnSeekBarChangeListener {
             insets
         }
 
+        Toast.makeText(this, "Activity Ajustes", Toast.LENGTH_SHORT).show()
+
         auth = Firebase.auth
         preferences = Preferences(this)
         comprobarDatos()
@@ -58,8 +60,18 @@ class AjustesActivity : AppCompatActivity(),  SeekBar.OnSeekBarChangeListener {
             binding.perfilLayout.setBackgroundColor(getColor(R.color.verde))
 
         }
-        binding.sbTamanoTitulo.progress = preferences.getTamano()
-        binding.tvTituloPerfil .textSize = preferences.getTamano().toFloat()
+        if(preferences.getTamano() == null){
+            binding.sbTamanoTitulo.progress = 20
+        } else {
+            binding.sbTamanoTitulo.progress = preferences.getTamano()
+        }
+
+        if(preferences.getTamano().toFloat() == null){
+            binding.tvTituloPerfil.textSize = 20f
+        } else {
+            binding.tvTituloPerfil.textSize = preferences.getTamano().toFloat()
+        }
+
         binding.etLatitud.setText(preferences.getLatitud().toString())
         binding.etLongitud.setText(preferences.getLongitud().toString())
 
@@ -75,8 +87,8 @@ class AjustesActivity : AppCompatActivity(),  SeekBar.OnSeekBarChangeListener {
             if(coordenadasCorrectas()){
                 val intent = Intent(this, MapaActivity::class.java)
                 val bundleMap = Bundle().apply {
-                    putFloat("LATITUD", preferences.getLatitud())
-                    putFloat("LONGITUD", preferences.getLongitud())
+                    putFloat("LATITUD", binding.etLatitud.text.toString().trim().toFloat())
+                    putFloat("LONGITUD", binding.etLongitud.text.toString().trim().toFloat())
                 }
                 intent.putExtras(bundleMap)
                 startActivity(intent)

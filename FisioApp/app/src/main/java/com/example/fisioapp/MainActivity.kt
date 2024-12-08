@@ -1,8 +1,8 @@
 package com.example.fisioapp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -37,17 +37,13 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
                         .addOnFailureListener{
-                            Toast.makeText(this, it.message.toString(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Hubo un error al iniciar sesión con Google", Toast.LENGTH_SHORT).show()
                         }
                 }
-                Toast.makeText(this, "Bienvenido ${cuenta.email}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
             } catch (e: ApiException){
-                Log.e("Error de Api -->", e.message.toString())
+                Toast.makeText(this, "Hubo un error al iniciar sesión con Google", Toast.LENGTH_SHORT).show()
             }
-        }
-
-        if(it.resultCode == RESULT_CANCELED){
-            Toast.makeText(this, "El usuario canceló el inicio de sesión.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -94,8 +90,10 @@ class MainActivity : AppCompatActivity() {
             .build()
         val googleClient = GoogleSignIn.getClient(this, googleConf)
 
-        // Para que no haga login automatico si he cerrado sesion
+        // Para que se pueda cerrar la sesion
         googleClient.signOut()
+
+        // Para iniciar sesion con google
         responseLauncher.launch(googleClient.signInIntent)
     }
 
@@ -135,7 +133,7 @@ class MainActivity : AppCompatActivity() {
         if(!datosCorrectos()) {
             return
         }
-        // Vamos a logear al usuario
+        // Logeamos al usuario
         auth.signInWithEmailAndPassword(email, pass)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
@@ -155,11 +153,22 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart(){
 
-        // Si ya tiene la sesion iniciada va directo a la siguiente activity
+        // Para iniciar la sesión directamente si ya hay un usuario logueado
         super.onStart()
         val currentUser = auth.currentUser
         if(currentUser != null){
             irActivityApp()
         }
     }
+
+    // Para que no se pueda volver a la pantalla anterior
+    @SuppressLint("MissingSuperCall")
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
+    }
+
+
 }

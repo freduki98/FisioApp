@@ -16,7 +16,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:text="NOTICIAS DE FISIOTERAPIA"
+        android:text="@string/noticias_de_fisioterapia"
         android:gravity="center"
         android:textSize="20sp"
         android:textStyle="bold"
