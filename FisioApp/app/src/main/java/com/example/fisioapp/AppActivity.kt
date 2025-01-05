@@ -1,5 +1,6 @@
 package com.example.fisioapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -31,9 +32,20 @@ class AppActivity : AppCompatActivity() {
 
         Toast.makeText(this, "HOME", Toast.LENGTH_SHORT).show()
 
+        setListeners()
+
         recogerBotonPulsado()
         inicializarFragment()
         cargarFragment(fragment)
+    }
+
+    private fun setListeners() {
+        binding.btnCrearPost.setOnClickListener {
+            startActivity(Intent(this, CrearPostActivity::class.java))
+        }
+        binding.btnAmigos.setOnClickListener {
+            startActivity(Intent(this, AmigosActivity::class.java))
+        }
     }
 
     private fun recogerBotonPulsado() {

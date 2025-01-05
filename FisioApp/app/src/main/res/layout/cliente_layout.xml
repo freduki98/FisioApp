@@ -52,7 +52,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvDni" />
 
         <Button
-            android:id="@+id/btn_borrar"
+            android:id="@+id/btnBorrar"
             android:layout_width="32dp"
             android:layout_height="40dp"
             android:layout_marginStart="2dp"
@@ -77,11 +77,11 @@
             app:iconSize="20dp"
             app:iconTint="#FFFFFF"
             app:iconTintMode="multiply"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_borrar"
-            app:layout_constraintEnd_toStartOf="@+id/btn_borrar"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBorrar"
+            app:layout_constraintEnd_toStartOf="@+id/btnBorrar"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toEndOf="@+id/tv_nombreCompleto"
-            app:layout_constraintTop_toTopOf="@+id/btn_borrar" />
+            app:layout_constraintTop_toTopOf="@+id/btnBorrar" />
 
         <ImageView
             android:id="@+id/imageViewCliente"
