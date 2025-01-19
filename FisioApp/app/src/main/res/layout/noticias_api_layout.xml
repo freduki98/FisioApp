@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:backgroundTint="#36923B"
+    android:backgroundTint="#0468BF"
     android:padding="5dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="10dp"
@@ -18,7 +18,7 @@
 
         <ImageView
             android:id="@+id/iv_news"
-            android:layout_width="275dp"
+            android:layout_width="0dp"
             android:layout_height="200dp"
             android:layout_marginTop="10dp"
             android:scaleType="centerCrop"
@@ -47,7 +47,7 @@
 
         <TextView
             android:id="@+id/tv_descripcion"
-            android:layout_width="250dp"
+            android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginTop="8dp"
             android:ellipsize="end"
@@ -55,6 +55,8 @@
             android:lines="2"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +77,7 @@
 
         <TextView
             android:id="@+id/tv_enlace"
-            android:layout_width="250dp"
+            android:layout_width="0dp"
             android:layout_height="20dp"
             android:layout_marginTop="5dp"
             android:gravity="center"

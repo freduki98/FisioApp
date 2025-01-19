@@ -5,11 +5,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fisioapp.databinding.AmigoLayoutBinding
 import com.example.fisioapp.models.AmigoModel
 
-class AmigoViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+class ContactoViewHolder(v: View) : RecyclerView.ViewHolder(v) {
     var binding = AmigoLayoutBinding.bind(v)
 
     fun render(
         am: AmigoModel,
+        irChat: (String) -> Unit,
         onDeleteClickListener: (String) -> Unit,
         onAddClickListener: (String) -> Unit,
         add: Boolean
@@ -36,6 +37,10 @@ class AmigoViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         binding.btnAdd.setOnClickListener{
             onAddClickListener(am.user)
         }
+        binding.btnChatear.setOnClickListener{
+            irChat(am.user)
+        }
+
 
 
     }

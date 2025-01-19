@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_clientes"
+        android:icon="@drawable/clientes_boton"
+        android:title="Clientes" />
+    <item
+        android:id="@+id/item_contactos"
+        android:icon="@drawable/contactos"
+        android:title="Contactos" />
+    <item
+        android:id="@+id/item_noticias"
+        android:icon="@drawable/noticias_boton"
+        android:title="Noticias" />
+    <item
+        android:id="@+id/item_galeria"
+        android:icon="@drawable/galeria"
+        android:title="Galería" />
+    <item
+        android:id="@+id/item_posts"
+        android:icon="@drawable/posts"
+        android:title="Publicaciones" />
+
+    <item
+        android:id="@+id/item_ajustes"
+        android:icon="@drawable/ajustes_boton"
+        android:title="Ajustes" />
+</menu>

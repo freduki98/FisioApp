@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.example.fisioapp.databinding.ActivityAppBinding
 import com.example.fisioapp.fragments.MenuFragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class AppActivity : AppCompatActivity() {
 
@@ -18,6 +21,7 @@ class AppActivity : AppCompatActivity() {
     private lateinit var binding : ActivityAppBinding
     var fragment = MenuFragment()
     private val bundle = Bundle()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,21 +34,87 @@ class AppActivity : AppCompatActivity() {
             insets
         }
 
+
+
         Toast.makeText(this, "HOME", Toast.LENGTH_SHORT).show()
 
-        setListeners()
+        setFragment()
+        setMenuLateral()
+    }
 
-        recogerBotonPulsado()
+    private fun setFragment() {
         inicializarFragment()
         cargarFragment(fragment)
     }
 
-    private fun setListeners() {
-        binding.btnCrearPost.setOnClickListener {
-            startActivity(Intent(this, CrearPostActivity::class.java))
+    private fun setMenuLateral() {
+        binding.navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.item_clientes -> {
+                    irActivityClientes()
+                    true
+                }
+
+                R.id.item_contactos -> {
+                    irActivityContactos()
+                    true
+                }
+
+                R.id.item_noticias -> {
+                    irActivityNoticias()
+                    true
+                }
+
+                R.id.item_galeria -> {
+                    irActivityGaleria()
+                    true
+                }
+
+                R.id.item_posts -> {
+                    irActivityPosts()
+                    true
+                }
+
+                R.id.item_ajustes -> {
+                    irActivityAjustes()
+                    true
+                }
+
+                else -> {false}
+            }
         }
-        binding.btnAmigos.setOnClickListener {
-            startActivity(Intent(this, AmigosActivity::class.java))
+    }
+
+
+    private fun irActivityContactos() {
+        startActivity(Intent(this, ContactosActivity::class.java))
+    }
+
+    private fun irActivityPosts() {
+        startActivity(Intent(this, CrearPostActivity::class.java))
+    }
+
+    private fun irActivityClientes() {
+        startActivity(Intent(this, ClientesActivity::class.java))
+    }
+
+    private fun irActivityNoticias() {
+        startActivity(Intent(this, NoticiasActivity::class.java))
+    }
+
+    private fun irActivityGaleria() {
+        startActivity(Intent(this, GaleriaActivity::class.java))
+    }
+
+    private fun irActivityAjustes() {
+        startActivity(Intent(this, AjustesActivity::class.java))
+    }
+
+
+    private fun inicializarFragment() {
+        recogerBotonPulsado()
+        fragment = MenuFragment().apply {
+            arguments = bundle
         }
     }
 
@@ -55,12 +125,6 @@ class AppActivity : AppCompatActivity() {
             bundle.putInt("BOTONPULSADO", botonPulsado)
         } else {
             bundle.putInt("BOTONPULSADO", 2)
-        }
-    }
-
-    private fun inicializarFragment() {
-        fragment = MenuFragment().apply {
-            arguments = bundle
         }
     }
 

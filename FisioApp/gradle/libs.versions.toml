@@ -2,27 +2,29 @@
 agp = "8.6.0"
 fragmentKtx = "1.8.5"
 kotlin = "1.9.0"
-coreKtx = "1.13.1"
+coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
-activity = "1.9.2"
-constraintlayout = "2.1.4"
+activity = "1.10.0"
+constraintlayout = "2.2.0"
 
 googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.1.0"
-playServicesAuth = "21.2.0"
+playServicesAuth = "21.3.0"
 
 converterGsonVersion = "2.11.0"
 gson = "2.10.1"
 picasso = "2.8"
+playServicesAuthVersion = "21.3.0"
 retrofit = "(2.11.0)"
 
 playServicesMaps = "19.0.0"
 swiperefreshlayout = "1.1.0"
 firebaseFirestoreKtx = "25.1.1"
+firebaseDatabase = "21.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -41,11 +43,13 @@ androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref
 converter-gson-v290 = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGsonVersion" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
+play-services-auth-v2130 = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuthVersion" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 
 play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
+firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

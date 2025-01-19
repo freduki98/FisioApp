@@ -6,7 +6,7 @@ import com.example.fisioapp.databinding.NoticiasApiLayoutBinding
 import com.example.fisioapp.models.NoticiasModel
 import com.squareup.picasso.Picasso
 
-class NoticiasViewHolder(v: View):RecyclerView.ViewHolder(v) {
+class NoticiaViewHolder(v: View):RecyclerView.ViewHolder(v) {
     val binding = NoticiasApiLayoutBinding.bind(v)
 
     fun render (noticia: NoticiasModel, irWebNoticia: (NoticiasModel) -> Unit){

@@ -64,7 +64,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvApellidosAmigo" />
 
         <Button
-            android:id="@+id/btn_chatear"
+            android:id="@+id/btnChatear"
             android:layout_width="36dp"
             android:layout_height="42dp"
             android:text="Button"

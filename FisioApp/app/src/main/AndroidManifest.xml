@@ -18,7 +18,10 @@
         android:theme="@style/Base.Theme.FisioApp_noActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".AmigosActivity"
+            android:name=".ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ContactosActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"

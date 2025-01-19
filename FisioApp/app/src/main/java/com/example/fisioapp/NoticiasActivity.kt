@@ -10,8 +10,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fisioapp.adapters.NoticiasAdapter
-import com.example.fisioapp.databinding.ActivityAnunciosBinding
+import com.example.fisioapp.adapters.NoticiaAdapter
+import com.example.fisioapp.databinding.ActivityNoticiasBinding
 import com.example.fisioapp.fragments.MenuFragment
 import com.example.fisioapp.models.NoticiasModel
 import com.example.fisioapp.providers.NoticiasProvider.newProvider
@@ -21,10 +21,10 @@ import kotlinx.coroutines.withContext
 
 class NoticiasActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityAnunciosBinding
+    private lateinit var binding: ActivityNoticiasBinding
 
     private var lista= mutableListOf<NoticiasModel>()
-    var adapter = NoticiasAdapter(lista) { noticia -> irWebNoticia (noticia) }
+    var adapter = NoticiaAdapter(lista) { noticia -> irWebNoticia (noticia) }
 
     var api = ""
 
@@ -35,7 +35,7 @@ class NoticiasActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        binding = ActivityAnunciosBinding.inflate(layoutInflater)
+        binding = ActivityNoticiasBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

@@ -41,11 +41,15 @@ android {
 
 dependencies {
 
-
     // -------------------- DEPENDENCIAS ------------------ //
 
     implementation(libs.play.services.auth)
+    implementation(libs.play.services.auth.v2130)
+    implementation(libs.play.services.maps)
+
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.database)
 
     implementation(libs.androidx.fragment.ktx)
 
@@ -53,8 +57,6 @@ dependencies {
     implementation(libs.picasso)
     implementation(libs.converter.gson.v290)
     implementation(libs.gson)
-
-    implementation(libs.play.services.maps)
 
     implementation(libs.androidx.swiperefreshlayout)
 
@@ -65,7 +67,6 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.firebase.firestore.ktx)
 
 
     testImplementation(libs.junit)
