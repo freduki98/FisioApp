@@ -7,20 +7,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
 import com.example.fisioapp.databinding.ActivityAppBinding
-import com.example.fisioapp.fragments.MenuFragment
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 
 class AppActivity : AppCompatActivity() {
 
 
     private lateinit var binding : ActivityAppBinding
-    var fragment = MenuFragment()
-    private val bundle = Bundle()
+
+    private lateinit var auth: FirebaseAuth
+    private lateinit var db : FirebaseFirestore
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,18 +31,20 @@ class AppActivity : AppCompatActivity() {
             insets
         }
 
-
+        auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
 
         Toast.makeText(this, "HOME", Toast.LENGTH_SHORT).show()
-
-        setFragment()
+        obtenerNombre()
         setMenuLateral()
     }
 
-    private fun setFragment() {
-        inicializarFragment()
-        cargarFragment(fragment)
+    private fun obtenerNombre() {
+        db.collection("users").document(auth.currentUser?.email.toString()).get().addOnSuccessListener {
+            binding.txtNombreUsuario.text = it.get("name").toString()
+        }
     }
+
 
     private fun setMenuLateral() {
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
@@ -111,29 +110,8 @@ class AppActivity : AppCompatActivity() {
     }
 
 
-    private fun inicializarFragment() {
-        recogerBotonPulsado()
-        fragment = MenuFragment().apply {
-            arguments = bundle
-        }
-    }
 
-    private fun recogerBotonPulsado() {
-        val datos = intent.extras
-        if(datos != null){
-            val botonPulsado = datos.getInt("BOTONPULSADO")
-            bundle.putInt("BOTONPULSADO", botonPulsado)
-        } else {
-            bundle.putInt("BOTONPULSADO", 2)
-        }
-    }
 
-    private fun cargarFragment(fg: Fragment) {
-        supportFragmentManager.commit {
-            setReorderingAllowed(true)
-            replace(R.id.fcv_menu, fg)
-        }
-    }
 
 
 }
