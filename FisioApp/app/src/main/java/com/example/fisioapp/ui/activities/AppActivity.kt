@@ -197,6 +197,7 @@ class AppActivity : AppCompatActivity() , OnMapReadyCallback{
                 R.id.item_cerrar_sesion -> {
                     auth.signOut()
                     finish()
+                    startActivity(Intent(this, LoginActivity::class.java))
                     true
                 }
 
@@ -231,6 +232,7 @@ class AppActivity : AppCompatActivity() , OnMapReadyCallback{
                     putString("lastname", apellidos)
                     putString("birth-date", fechaNac)
                 }
+                obtenerDatosUsuario()
             }
             else -> null
         }
