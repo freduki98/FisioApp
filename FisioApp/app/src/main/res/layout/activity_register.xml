@@ -5,14 +5,16 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    android:background="#FFFFFF"
+    android:backgroundTint="#FFFFFF"
+    tools:context=".ui.activities.RegisterActivity">
 
     <TextView
         android:id="@+id/tv_titulo_registro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="49dp"
-        android:text="Registro"
+        android:layout_marginTop="50dp"
+        android:text="@string/registro"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,79 +22,136 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/etnombreRegister"
-        android:layout_width="wrap_content"
+    <!-- TextInputLayout para Nombre -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etNombreRegisterLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="15dp"
         android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Nombre..."
-        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_titulo_registro" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_titulo_registro">
 
-    <EditText
-        android:id="@+id/etApellidosRegister"
-        android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etnombreRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/nombre"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- TextInputLayout para Apellidos -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etApellidosRegisterLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="15dp"
         android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Apellidos..."
-        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etnombreRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/etNombreRegisterLayout">
 
-    <EditText
-        android:id="@+id/etFechaNacRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Fecha de nacimiento..."
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etApellidosRegister" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etApellidosRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/apellidos"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Botón para Guardar -->
     <Button
         android:id="@+id/btnGuardarRegistro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="230dp"
-        android:text="Registrarse"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="30dp"
+        android:text="@string/registrarse"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnVolver"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etFechaNacRegister" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/etCorreoRegister"
+    <!-- TextInputLayout para Correo -->
+
+    <Button
+        android:id="@+id/btnVolver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Correo..."
-        android:inputType="text"
+        android:text="@string/volver"
+        app:icon="@drawable/ic_volver"
+        app:layout_constraintBottom_toBottomOf="@+id/btnGuardarRegistro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etFechaNacRegister" />
+        app:layout_constraintStart_toEndOf="@+id/btnGuardarRegistro"
+        app:layout_constraintTop_toTopOf="@+id/btnGuardarRegistro" />
 
-    <EditText
-        android:id="@+id/etPassRegister"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etCorreoRegisterLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="15dp"
         android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Contraseña..."
-        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etFechaNacRegisterLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etCorreoRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/correo"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- TextInputLayout para Contraseña -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etPassRegisterLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etCorreoRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/etCorreoRegisterLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPassRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/contrase_a"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- TextInputLayout para Fecha de Nacimiento -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etFechaNacRegisterLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etApellidosRegisterLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etFechaNacRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:ems="10"
+            android:focusable="false"
+            android:hint="@string/fecha_de_nacimiento"
+            android:inputType="date" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

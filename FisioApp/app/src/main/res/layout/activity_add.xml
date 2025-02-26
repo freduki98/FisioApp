@@ -5,13 +5,13 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddActivity">
+    tools:context=".ui.activities.AddActivity">
 
     <TextView
         android:id="@+id/et_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="50dp"
         android:text="@string/lesion_y_tratamiento"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +22,7 @@
         android:id="@+id/et_nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:ems="10"
         android:hint="@string/nombre"
         android:inputType="textPersonName"
@@ -47,22 +47,23 @@
         app:layout_constraintTop_toBottomOf="@+id/et_nombre" />
 
     <Button
-        android:id="@+id/btn2_enviar"
+        android:id="@+id/btn_enviar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:backgroundTint="#66BB6A"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/verde"
         android:text="@string/guardar"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_cancelar"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTratamiento" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/et_title2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:text="@string/nuevo_cliente"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,13 +75,14 @@
         android:id="@+id/btn_cancelar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#E53935"
+        android:backgroundTint="#F49B97"
         android:text="@string/cancelar"
-        app:layout_constraintBottom_toBottomOf="@+id/btn2_enviar"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_enviar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn2_enviar"
-        app:layout_constraintTop_toTopOf="@+id/btn2_enviar" />
+        app:layout_constraintStart_toEndOf="@+id/btn_enviar"
+        app:layout_constraintTop_toTopOf="@+id/btn_enviar" />
 
     <EditText
         android:id="@+id/etLesion"
@@ -107,6 +109,29 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etLesion" />
+
+    <TextView
+        android:id="@+id/tv_dolor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/dolor_0"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etTratamiento" />
+
+    <SeekBar
+        android:id="@+id/seekBarDolor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:max="10"
+        android:progress="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dolor" />
 
     <ProgressBar
         android:id="@+id/progressBar"

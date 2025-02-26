@@ -2,28 +2,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/item_clientes"
-        android:icon="@drawable/clientes_boton"
-        android:title="Clientes" />
-    <item
-        android:id="@+id/item_contactos"
-        android:icon="@drawable/contactos"
-        android:title="Contactos" />
-    <item
-        android:id="@+id/item_noticias"
-        android:icon="@drawable/noticias_boton"
-        android:title="Noticias" />
-    <item
-        android:id="@+id/item_galeria"
-        android:icon="@drawable/galeria"
-        android:title="Galería" />
-    <item
-        android:id="@+id/item_posts"
-        android:icon="@drawable/posts"
-        android:title="Publicaciones" />
+        android:id="@+id/item_chat"
+        android:icon="@drawable/ic_chat"
+        android:title="Chat" />
 
     <item
-        android:id="@+id/item_ajustes"
-        android:icon="@drawable/ajustes_boton"
-        android:title="Ajustes" />
+        android:id="@+id/item_clientes"
+        android:icon="@drawable/ic_cliente"
+        android:title="Clientes" />
+
+    <item
+        android:id="@+id/item_multimedia"
+        android:icon="@drawable/ic_video"
+        android:title="Multimedia" />
+
+
+    <item
+        android:id="@+id/item_cerrar_sesion"
+        android:icon="@drawable/ic_cerrar_sesion"
+        android:title="Cerrar Sesión" />
+
+    <item
+        android:id="@+id/item_salir"
+        android:icon="@drawable/ic_salir"
+        android:title="Salir" />
 </menu>

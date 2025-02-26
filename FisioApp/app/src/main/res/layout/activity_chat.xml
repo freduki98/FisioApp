@@ -5,21 +5,68 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatActivity">
+    tools:context=".ui.activities.ChatActivity">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_correoContacto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardBackgroundColor="#B19FD0"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="10dp"
+        app:cardUseCompatPadding="true"
+        android:padding="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tvContacto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/aclonica"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:gravity="start" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                app:backgroundTint="@android:color/white"
+                app:maxImageSize="40dp"
+                app:srcCompat="@drawable/ic_volver" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_chat"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="7dp"
         android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toTopOf="@+id/etMsnChat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/card_correoContacto" />
 
     <EditText
         android:id="@+id/etMsnChat"
@@ -29,7 +76,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="25dp"
         android:ems="10"
-        android:hint="Escribe tu mensaje..."
+        android:hint="@string/escribe_tu_mensaje"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnEnviarChat"
@@ -42,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:backgroundTint="#66BB6A"
-        android:text="Enviar"
+        android:text="@string/enviar"
         app:layout_constraintBottom_toBottomOf="@+id/etMsnChat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

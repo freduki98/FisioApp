@@ -1,39 +1,63 @@
 <resources>
     <string name="app_name">FisioApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="lesion_y_tratamiento">LESIÓN Y TRATAMIENTO</string>
-    <string name="nombre">Nombre…</string>
-    <string name="direccion">Dirección…</string>
+    <string name="nombre">Nombre</string>
+    <string name="direccion">Dirección</string>
     <string name="guardar">Guardar</string>
     <string name="nuevo_cliente">NUEVO CLIENTE</string>
     <string name="cancelar">Cancelar</string>
     <string name="lesion_actual">Lesión actual</string>
     <string name="tratamiento_actual">Tratamiento actual</string>
-    <string name="dni">Dni…</string>
-    <string name="perfil">PERFIL</string>
+    <string name="dni">Dni</string>
     <string name="usuario">Usuario</string>
-    <string name="verde">Verde</string>
-    <string name="amarillo">Amarillo</string>
-    <string name="color_fondo">Color fondo</string>
-    <string name="tamano_titulo">Tamaño titulo</string>
-    <string name="nickname">Nickname…</string>
-    <string name="mostrar_ubicacion">Mostrar ubicación</string>
     <string name="cerrar_sesion">Cerrar Sesión</string>
-    <string name="latitud">Latitud…</string>
-    <string name="longitud">Longitud…</string>
-    <string name="coordenadas">Coordenadas</string>
-    <string name="noticias_de_fisioterapia">NOTICIAS DE FISIOTERAPIA</string>
-    <string name="bienvenido">BIENVENIDO...</string>
+    <string name="bienvenido">BIENVENIDO</string>
     <string name="cuerpo_humano">Cuerpo humano</string>
     <string name="movimientos">Movimientos</string>
-    <string name="ejercicios">EJERCICIOS</string>
+    <string name="ejercicios">Ejercicios</string>
     <string name="email">Email</string>
     <string name="crear_cuenta">Crear cuenta</string>
     <string name="iniciar_sesion">Iniciar sesión</string>
     <string name="password">Password</string>
     <string name="fisioapp">FISIOAPP</string>
+    <string name="pistaMensaje">Enviar</string>
+    <string name="volver">Volver</string>
+    <string name="mis_clientes">MIS CLIENTES</string>
+    <string name="enviar">Enviar</string>
     <string name="iniciar_sesion_con_google">Iniciar sesión con Google</string>
+    <string name="escribe_tu_mensaje">Escribe tu mensaje...</string>
+    <string name="mis_contactos">MIS CONTACTOS</string>
+    <string name="buscar_por_correo">Buscar por correo...</string>
+    <string name="mis_videos">MI MULTIMEDIA</string>
+    <string name="siguiente">Siguiente</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="registro">Registro</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="correo">Correo</string>
+    <string name="fecha_de_nacimiento">Fecha de nacimiento</string>
+    <string name="dolor_0">Dolor: 0</string>
+    <string name="eje_x">Eje X</string>
+    <string name="acelerometro">Acelerometro</string>
+    <string name="giroscopio">Giroscopio</string>
+    <string name="mis_sensores">Mis sensores</string>
+    <string name="eje_y">Eje Y</string>
+    <string name="eje_z">Eje Z</string>
+    <string name="especialidad">Especialidad</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="mas_info_aqu">Más info aquí</string>
+    <string name="a_adir_contactos">Añadir contactos</string>
+    <string name="fisioterapeuta">Fisioterapeuta</string>
+    <string name="musica_on">Musica On</string>
+    <string name="musica_off">Musica Off</string>
+
+    <string-array name="array_especialidades">
+        <item>Neurológica</item>
+        <item>Deportiva</item>
+        <item>Cardiopulmonar</item>
+        <item>Pediátrica</item>
+    </string-array>
 
     <string-array name="array_cuerpoHumano">
         <item>SIST. ESQUELÉTICO</item>

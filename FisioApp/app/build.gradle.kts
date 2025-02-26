@@ -58,7 +58,6 @@ dependencies {
     implementation(libs.converter.gson.v290)
     implementation(libs.gson)
 
-    implementation(libs.androidx.swiperefreshlayout)
 
     // ---------------------------------------------------- //
 
@@ -67,6 +66,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.fragment)
 
 
     testImplementation(libs.junit)
