@@ -138,32 +138,26 @@ class AppActivity : AppCompatActivity() , OnMapReadyCallback{
             when (item.itemId) {
                 R.id.item_noticias -> {
                     navegarDestino("noticias", "Noticias")
-                    binding.topAppBar.title = "Noticias"
                     true
                 }
 
                 R.id.item_galeria -> {
                     navegarDestino("galeria", "Galería")
-                    binding.topAppBar.title = "Galería"
                     true
                 }
 
                 R.id.item_home -> {
                     navegarDestino("home", "FisioApp")
-                    binding.topAppBar.title = "FisioApp"
                     true
                 }
 
                 R.id.item_ajustes -> {
                     navegarDestino("ajustes", "Ajustes")
-                    binding.topAppBar.title = "Ajustes"
                     true
                 }
 
                 R.id.item_ubicacion -> {
                     navegarDestino("ubicacion", "Ubicación")
-                    binding.topAppBar.title = "Ubicación"
-                    binding.main.closeDrawer(GravityCompat.START)
                     true
                 }
 
