@@ -230,6 +230,4 @@ class AppActivity : AppCompatActivity(){
             replace(R.id.fcv, fragment)
         }
     }
-
-
 }
