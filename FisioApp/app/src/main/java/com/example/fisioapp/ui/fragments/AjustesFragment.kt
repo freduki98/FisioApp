@@ -7,9 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.view.get
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.fisioapp.R
 import com.example.fisioapp.databinding.FragmentAjustesBinding
+import com.example.fisioapp.domain.models.UserModel
+import com.example.fisioapp.ui.viewmodels.ClientesViewModel
+import com.example.fisioapp.ui.viewmodels.UserViewModel
 import com.example.fisioapp.utils.mostrarDatePicker
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -30,16 +35,15 @@ class AjustesFragment : Fragment(R.layout.fragment_ajustes) {
     private var nombre = ""
     private var apellidos = ""
     private var fechaNac = ""
+    private var especialidad = ""
+
+    private val viewModel : UserViewModel by viewModels()
+
+    private lateinit var fisio : UserModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Obtenemos los argumentos que le pasan desde la activity
-        arguments?.let {
-            nombre = it.getString("name") ?: ""
-            apellidos = it.getString("lastname") ?: ""
-            fechaNac = it.getString("birth-date") ?: ""
-        }
 
         // Inicialización de Firebase y Preferences
         auth = Firebase.auth
@@ -58,12 +62,6 @@ class AjustesFragment : Fragment(R.layout.fragment_ajustes) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
-            etNombrePerfil.setText(nombre)
-            etApellidosPerfil.setText(apellidos)
-            etFechaNacRegister.setText(fechaNac)
-        }
-
 
         // Configuración del Spinner con el array de especialidades
         adapterEspecialidad = ArrayAdapter(
@@ -73,7 +71,24 @@ class AjustesFragment : Fragment(R.layout.fragment_ajustes) {
         )
         // Asignamos el adaptador al Spinner
         binding.spinnerEspecialidad.adapter = adapterEspecialidad
-        binding.spinnerEspecialidad.isEnabled = binding.swFisio.isChecked
+
+        viewModel.fisio.observe(viewLifecycleOwner) {
+            fisio = it
+            binding.apply {
+                etNombrePerfil.setText(fisio.nombre)
+                etApellidosPerfil.setText(fisio.apellidos)
+                etFechaNacRegister.setText(fisio.fechaNac)
+                val position =
+                    (0 until adapterEspecialidad.count).find { adapterEspecialidad.getItem(it) == fisio.especialidad }
+                        ?: -1
+                if (position != -1) {
+                    spinnerEspecialidad.setSelection(position)
+                }
+            }
+
+        }
+
+        viewModel.traerFisio()
 
         setListeners()
     }
@@ -82,10 +97,6 @@ class AjustesFragment : Fragment(R.layout.fragment_ajustes) {
     // ---------------------------------------------------------------------------------------------
 
     private fun setListeners() {
-        // Habilitamos o deshabilitamos el Spinner según el estado del componente Switch
-        binding.swFisio.setOnCheckedChangeListener { _, isChecked ->
-            binding.spinnerEspecialidad.isEnabled = isChecked
-        }
 
         // Configuramos el OnClickListener para el EditText de la fecha de nacimiento
         binding.etFechaNacRegister.setOnClickListener {
@@ -97,6 +108,7 @@ class AjustesFragment : Fragment(R.layout.fragment_ajustes) {
                 nombre = etNombrePerfil.text.toString()
                 apellidos = etApellidosPerfil.text.toString()
                 fechaNac = etFechaNacRegister.text.toString()
+                especialidad = binding.spinnerEspecialidad.selectedItem.toString()
             }
 
             // Actualizamos los datos en Firebase con corrutinas
@@ -105,10 +117,12 @@ class AjustesFragment : Fragment(R.layout.fragment_ajustes) {
                     val userDocRef =
                         db.collection("users").document(auth.currentUser?.email.toString())
 
+
                     val datosActualizados = mapOf(
                         "birth-date" to fechaNac,
                         "name" to nombre,
-                        "lastname" to apellidos
+                        "lastname" to apellidos,
+                        "especialidad" to especialidad
                     )
 
                     userDocRef.update(datosActualizados).await()

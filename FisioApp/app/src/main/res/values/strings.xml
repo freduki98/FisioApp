@@ -53,10 +53,12 @@
     <string name="musica_off">Musica Off</string>
 
     <string-array name="array_especialidades">
+        <item>Ninguna</item>
         <item>Neurológica</item>
         <item>Deportiva</item>
         <item>Cardiopulmonar</item>
         <item>Pediátrica</item>
+        <item>Geriátrica</item>
     </string-array>
 
     <string-array name="array_cuerpoHumano">

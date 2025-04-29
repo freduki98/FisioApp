@@ -2,8 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="azul">#BDDDF6</color>
-    <color name="verde">#BCD1A2</color>
-    <color name="navigationBar">#F3EDF7</color>
-    <color name="ic_launcher_background_custom_def">#F3EDF7</color>
+    <color name="gris">#E7E6E6</color>
+    <color name="verde">#66BB6A</color>
+    <color name="rojo">#D34957</color>
+    <color name="edit">#FFA726</color>
+    <color name="background_default">#10403B</color>
+    <color name="rosado_claro">#F3EDF7</color>
+
+    <!--<color name="background_default">#F3EDF7</color>-->
 </resources>

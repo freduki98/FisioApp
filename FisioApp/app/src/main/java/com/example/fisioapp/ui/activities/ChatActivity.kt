@@ -35,9 +35,6 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
 
-    private var contacto = ""
-    private var nodo = ""
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -52,30 +49,14 @@ class ChatActivity : AppCompatActivity() {
         inicializarComponentes()
         setListeners()
         setRecycler()
-
     }
 
     private fun inicializarComponentes() {
         auth = FirebaseAuth.getInstance()
-        obtenerNodoChatPrivado()
-        database = FirebaseDatabase.getInstance().getReference("chat").child(nodo)
+        // 🔁 NODO FIJO GLOBAL
+        database = FirebaseDatabase.getInstance().getReference("chat").child("global")
         adapter = ChatAdapter(listaChat, auth.currentUser?.email.toString().encodeNode())
-        binding.tvContacto.text = ">> " + "${contacto}"
-
-    }
-
-    private fun obtenerNodoChatPrivado() {
-        // Recuperamos el correo del contacto
-        if (intent.extras != null) {
-            contacto = intent.getStringExtra("USER").toString()
-        }
-
-        // Ordenamos los correos por orden alfabético
-        val user = auth.currentUser?.email.toString()
-        val sortedUsers = listOf(user, contacto).sorted()
-
-        // Generamos el nodo único
-        nodo = "chat-${sortedUsers[0]}-${sortedUsers[1]}".encodeNode()
+        binding.tvContacto.text = "CHAT DE FISIOTERAPEUTAS"
     }
 
     private fun setRecycler() {
@@ -83,16 +64,11 @@ class ChatActivity : AppCompatActivity() {
         binding.rvChat.adapter = adapter
     }
 
-
     private fun setListeners() {
         binding.btnEnviarChat.setOnClickListener {
             enviarMensaje()
         }
-        binding.fabBack.setOnClickListener {
-            finish()
-        }
 
-        // Ponemos un listener a la base de datos para recuperar los mensajes
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 listaChat.clear()
@@ -100,53 +76,36 @@ class ChatActivity : AppCompatActivity() {
                     val chat = nodo.getValue(MensajeModel::class.java)
                     listaChat.add(chat!!)
                 }
-                // Ordenamos la lista por fecha
                 listaChat.sortBy { it.fecha }
-
-                // Actualizamos el adapter
                 adapter.updateAdapter(listaChat)
-
-                // Scroll para ir directo al último mensaje
                 binding.rvChat.scrollToPosition(listaChat.size - 1)
             }
 
             override fun onCancelled(error: DatabaseError) {
                 Toast.makeText(this@ChatActivity, error.message, Toast.LENGTH_SHORT).show()
             }
-
         })
 
-        // Listener para el botón de enviar
-        binding.etMsnChat.setOnEditorActionListener { v, actionId, event ->
-            // Si se ha pulsado el botón de enviar o se ha pulsado la tecla Enter
+        binding.etMsnChat.setOnEditorActionListener { _, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE ||
-                event.keyCode == KeyEvent.KEYCODE_ENTER &&
-                event.action == KeyEvent.ACTION_DOWN
+                (event?.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)
             ) {
-                // Se ejecuta estas acciones
                 enviarMensaje()
                 ocultarTeclado()
                 true
             } else {
                 false
             }
-
-
         }
-
     }
 
-    // Ocultamos el teclado
     private fun ocultarTeclado() {
         val inputMethodManager =
             getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         val view = currentFocus ?: View(this)
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
-
     }
 
-
-    // Enviamos el mensaje
     private fun enviarMensaje() {
         val mensajeTexto = binding.etMsnChat.text.toString()
         if (mensajeTexto.isNotEmpty()) {
@@ -156,19 +115,16 @@ class ChatActivity : AppCompatActivity() {
                 fecha = System.currentTimeMillis()
             )
 
-            database.push().setValue(mensajeModel)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(this, "Mensaje enviado", Toast.LENGTH_SHORT).show()
-                        binding.etMsnChat.text.clear()
-                    } else {
-                        Toast.makeText(this, "Error al enviar mensaje", Toast.LENGTH_SHORT).show()
-                        Log.d("error", task.exception.toString())
-                    }
+            database.push().setValue(mensajeModel).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    binding.etMsnChat.text?.clear()
+                } else {
+                    Toast.makeText(this, "Error al enviar mensaje", Toast.LENGTH_SHORT).show()
+                    Log.d("error", task.exception.toString())
                 }
+            }
         } else {
             Toast.makeText(this, "El mensaje no puede estar vacío", Toast.LENGTH_SHORT).show()
         }
-
     }
 }

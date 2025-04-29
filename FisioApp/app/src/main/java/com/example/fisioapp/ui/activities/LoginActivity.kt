@@ -77,7 +77,7 @@ class LoginActivity : AppCompatActivity() {
                             "name" to nombre,
                             "lastname" to apellidos,
                             "birth-date" to fechaNac,
-                            "connections" to mutableListOf<String>()
+                            "especialidad" to "Ninguna"
                         )
                     )
 

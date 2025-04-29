@@ -2,59 +2,66 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fl_chat"
-    android:layout_gravity="end"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_gravity="end">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewChat"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="6dp"
-        app:cardUseCompatPadding="true"
-        >
+        app:cardBackgroundColor="#FBFBFB"
+        android:padding="2dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_chat"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:layout_marginTop="4dp"
+            android:background="@drawable/chat_bubble"
+            android:padding="12dp">
 
+            <!-- Correo del usuario con mayor contraste -->
             <TextView
                 android:id="@+id/tvEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:textColor="#868986"
-                android:textSize="10sp"
+                android:textColor="#2C3E50"
+                android:textSize="12sp"
                 android:textStyle="bold|italic"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <!-- Mensaje con un color de texto que contraste -->
             <TextView
                 android:id="@+id/tvMensaje"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                app:layout_constraintBottom_toTopOf="@+id/tvFecha"
-                app:layout_constraintStart_toStartOf="@+id/tvEmail"
-                app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+                android:fontFamily="@font/roboto"
+                android:lineSpacingExtra="4dp"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvEmail" />
 
+            <!-- Fecha con menor contraste, más suave -->
             <TextView
                 android:id="@+id/tvFecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="80dp"
-                android:layout_marginBottom="5dp"
-                android:textColor="#7C7D7E"
-                android:textColorLink="#878585"
-                android:textSize="8sp"
-                android:textStyle="bold|italic"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:layout_marginTop="10dp"
+                android:textColor="#000000"
+                android:textSize="10sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvMensaje" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </FrameLayout>

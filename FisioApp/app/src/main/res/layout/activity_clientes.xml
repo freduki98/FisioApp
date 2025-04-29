@@ -1,45 +1,34 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp"
+    android:background="@color/background_default"
     tools:context=".ui.activities.ClientesActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_misClientes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="#B19FD0"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="10dp"
-        android:layout_marginTop="20dp"
         app:cardUseCompatPadding="true"
+        android:background="@color/background_default"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="NotSibling">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tvVideos"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#B19FD0"
-            android:padding="12dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
+            android:paddingTop="25dp"
+            android:paddingBottom="15dp"
             android:textColor="@color/white"
+            android:background="@color/background_default"
             android:text="@string/mis_clientes"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-
-
+            android:textSize="22sp"
+            android:textStyle="bold" />
     </androidx.cardview.widget.CardView>
 
     <SearchView
@@ -49,7 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/bg_rounded"
         android:queryHint="@string/nombre"
         app:layout_constraintEnd_toStartOf="@+id/fab_add"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,20 +51,24 @@
         android:layout_height="0dp"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnVolver"
+        android:background="@color/rosado_claro"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
+        android:backgroundTint="#FFFFFF"
         android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/searchView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/searchView"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@android:drawable/ic_input_add"
+        app:tint="#000000" />
 
     <ImageView
         android:id="@+id/ivClientes"
@@ -88,18 +82,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
         tools:srcCompat="@tools:sample/avatars" />
-
-    <Button
-        android:id="@+id/btnVolver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="@string/volver"
-        app:icon="@drawable/ic_volver"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

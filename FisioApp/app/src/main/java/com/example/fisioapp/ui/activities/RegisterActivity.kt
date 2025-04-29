@@ -50,8 +50,6 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun setListeners() {
-        binding.btnVolver.setOnClickListener {finish()}
-
         binding.btnGuardarRegistro.setOnClickListener {
             if (datosCorrectos()) {
 

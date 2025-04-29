@@ -12,12 +12,6 @@
         android:title="Clientes" />
 
     <item
-        android:id="@+id/item_multimedia"
-        android:icon="@drawable/ic_video"
-        android:title="Multimedia" />
-
-
-    <item
         android:id="@+id/item_cerrar_sesion"
         android:icon="@drawable/ic_cerrar_sesion"
         android:title="Cerrar Sesión" />

@@ -10,9 +10,15 @@ import com.example.fisioapp.domain.models.ClienteModel
 
 class ClienteAdapter(
     var lista: MutableList<ClienteModel>,
-    private val borrarCliente: (Int) -> Unit,
-    private val actualizarCliente: (ClienteModel) -> Unit
+    private val borrarCliente: (ClienteModel) -> Unit,
+    private val actualizarCliente: (ClienteModel) -> Unit,
+    private val onClickCliente: (ClienteModel) -> Unit
 ) : RecyclerView.Adapter<ClienteViewHolder>() {
+
+    fun actualizarAdapter(list: List<ClienteModel>){
+        lista = list.toList().toMutableList()
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClienteViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.layout_cliente, parent, false)
@@ -22,7 +28,7 @@ class ClienteAdapter(
     override fun getItemCount(): Int = lista.size
 
     override fun onBindViewHolder(holder: ClienteViewHolder, position: Int) {
-        holder.render(lista[position], borrarCliente, actualizarCliente)
+        holder.render(lista[position], borrarCliente, actualizarCliente, onClickCliente)
     }
 }
 
@@ -31,23 +37,26 @@ class ClienteViewHolder(v: View) : RecyclerView.ViewHolder(v) {
 
     fun render(
         c: ClienteModel,
-        borrarCliente: (Int) -> Unit,
-        actualizarCliente: (ClienteModel) -> Unit
+        borrarCliente: (ClienteModel) -> Unit,
+        actualizarCliente: (ClienteModel) -> Unit,
+        onClickCliente: (ClienteModel) -> Unit
     ) {
         binding.apply {
-            tvDni.text = "Dni: ${c.dni}"
-            tvNombreCompleto.text = c.nombre
-            tvDireccion.text = "Dirección: ${c.direccion}"
-            tvLesion.text = "Lesión: ${c.lesion}"
-            tvTratamiento.text = "Tratamiento: ${c.tratamiento}"
+            tvNombreCompleto.text = c.nombre + " " + c.apellidos
+            tvCorreo.text = c.paciente_id
+            tvTelefono.text = c.telefono
 
 
             btnBorrar.setOnClickListener {
-                borrarCliente(adapterPosition)
+                borrarCliente(c)
             }
 
             btnUpdate.setOnClickListener {
                 actualizarCliente(c)
+            }
+
+            itemView.setOnClickListener {
+                onClickCliente(c)
             }
         }
     }

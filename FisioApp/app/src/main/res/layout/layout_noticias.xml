@@ -4,6 +4,8 @@
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp"
     android:backgroundTint="#FBF9FD"
     android:layout_margin="8dp">
 
