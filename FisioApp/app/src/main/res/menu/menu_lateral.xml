@@ -4,20 +4,20 @@
     <item
         android:id="@+id/item_chat"
         android:icon="@drawable/ic_chat"
-        android:title="Chat" />
+        android:title="@string/chat_menulateral" />
 
     <item
         android:id="@+id/item_clientes"
         android:icon="@drawable/ic_cliente"
-        android:title="Clientes" />
+        android:title="@string/clientes" />
 
     <item
         android:id="@+id/item_cerrar_sesion"
         android:icon="@drawable/ic_cerrar_sesion"
-        android:title="Cerrar Sesión" />
+        android:title="@string/cerrar_sesi_n" />
 
     <item
         android:id="@+id/item_salir"
         android:icon="@drawable/ic_salir"
-        android:title="Salir" />
+        android:title="@string/salir" />
 </menu>

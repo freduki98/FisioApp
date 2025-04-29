@@ -10,13 +10,13 @@
     android:backgroundTintMode="screen"
     tools:context=".ui.activities.LoginActivity">
 
-    <!-- Nombre -->
+    <!-- Correo electrónico -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_correo"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Correo electrónico..."
+        android:hint="@string/correo_electr_nico"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="25dp"
@@ -62,13 +62,13 @@
         app:layout_constraintStart_toEndOf="@+id/btn_register"
         app:layout_constraintTop_toTopOf="@+id/btn_register" />
 
-    <!-- Nombre -->
+    <!-- Contraseña -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_contrasena"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Contraseña..."
+        android:hint="@string/contrase_a"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="25dp"
@@ -81,7 +81,7 @@
             android:id="@+id/et_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName" />
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -100,8 +100,8 @@
 
     <Button
         android:id="@+id/buttonGoogle"
-        android:layout_width="344dp"
-        android:layout_height="46dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="25dp"
@@ -112,7 +112,6 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton

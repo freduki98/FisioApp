@@ -37,9 +37,9 @@ class AjustesFragment : Fragment(R.layout.fragment_ajustes) {
     private var fechaNac = ""
     private var especialidad = ""
 
-    private val viewModel : UserViewModel by viewModels()
+    private val viewModel: UserViewModel by viewModels()
 
-    private lateinit var fisio : UserModel
+    private lateinit var fisio: UserModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +62,13 @@ class AjustesFragment : Fragment(R.layout.fragment_ajustes) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setAdapters()
+        setViewModel()
+        viewModel.traerFisio()
+        setListeners()
+    }
 
+    private fun setAdapters() {
         // Configuración del Spinner con el array de especialidades
         adapterEspecialidad = ArrayAdapter(
             requireContext(),
@@ -71,7 +77,9 @@ class AjustesFragment : Fragment(R.layout.fragment_ajustes) {
         )
         // Asignamos el adaptador al Spinner
         binding.spinnerEspecialidad.adapter = adapterEspecialidad
+    }
 
+    private fun setViewModel() {
         viewModel.fisio.observe(viewLifecycleOwner) {
             fisio = it
             binding.apply {
@@ -88,9 +96,9 @@ class AjustesFragment : Fragment(R.layout.fragment_ajustes) {
 
         }
 
-        viewModel.traerFisio()
-
-        setListeners()
+        viewModel.toastMessage.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        }
     }
 
 
@@ -111,39 +119,16 @@ class AjustesFragment : Fragment(R.layout.fragment_ajustes) {
                 especialidad = binding.spinnerEspecialidad.selectedItem.toString()
             }
 
-            // Actualizamos los datos en Firebase con corrutinas
-            lifecycleScope.launch(Dispatchers.IO) {
-                try {
-                    val userDocRef =
-                        db.collection("users").document(auth.currentUser?.email.toString())
-
-
-                    val datosActualizados = mapOf(
-                        "birth-date" to fechaNac,
-                        "name" to nombre,
-                        "lastname" to apellidos,
-                        "especialidad" to especialidad
-                    )
-
-                    userDocRef.update(datosActualizados).await()
-
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(
-                            requireContext(),
-                            "Datos actualizados correctamente",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                } catch (e: Exception) {
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(
-                            requireContext(),
-                            "Error al actualizar datos: ${e.message}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-            }
+            viewModel.actualizarDatosFisio(
+                UserModel(
+                    auth.currentUser?.email.toString(),
+                    nombre,
+                    apellidos,
+                    fechaNac,
+                    especialidad
+                )
+            )
         }
+
     }
 }

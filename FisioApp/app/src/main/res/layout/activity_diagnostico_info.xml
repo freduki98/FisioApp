@@ -19,13 +19,27 @@
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="30dp"
         android:text="Nombre del Diagnóstico"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
+        android:textColor="@color/background_default"
+        android:textSize="22sp"
         android:gravity="center"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/diviserLine"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:background="@color/background_default"
+        android:layout_width="0dp"
+        android:layout_height="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_margin="20dp"
+        android:progress="0"
+        android:max="100"
+        app:layout_constraintTop_toBottomOf="@+id/tvNombreDiagnostico"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Label: Fecha del diagnóstico -->
     <TextView
@@ -35,11 +49,11 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="15dp"
-        android:text="Fecha del diagnóstico"
+        android:text="@string/fecha_del_diagn_stico"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvNombreDiagnostico" />
+        app:layout_constraintTop_toBottomOf="@id/diviserLine" />
 
     <!-- TextInputLayout para Fecha de Diagnóstico -->
     <com.google.android.material.textfield.TextInputLayout
@@ -70,7 +84,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="15dp"
-        android:text="Fecha de inicio del tratamiento"
+        android:text="@string/fecha_de_inicio_del_tratamiento"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,7 +119,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="15dp"
-        android:text="Fecha de fin del tratamiento"
+        android:text="@string/fecha_de_fin_del_tratamiento"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -138,7 +152,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Observaciones o síntomas"
+        android:text="@string/observaciones_o_s_ntomas"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/etObservaciones"
@@ -171,7 +185,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Medicamentos"
+        android:text="@string/medicamentos"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/etMedicamentos"
@@ -204,7 +218,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="15dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="2"
@@ -230,7 +244,7 @@
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:backgroundTint="#D34957"
-            android:text="@string/cancelar"
+            android:text="@string/eliminar"
             android:textColor="@color/white"
             app:cornerRadius="12dp" />
     </LinearLayout>

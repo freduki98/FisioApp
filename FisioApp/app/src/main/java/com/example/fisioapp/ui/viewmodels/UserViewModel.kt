@@ -1,8 +1,11 @@
 package com.example.fisioapp.ui.viewmodels
 
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.example.fisioapp.domain.models.UserModel
 import com.google.firebase.auth.FirebaseAuth
@@ -22,11 +25,11 @@ class UserViewModel : ViewModel() {
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
 
-    // LiveData para mostrar el mensaje del Toast
+    // LiveData para manejar los datos del fisio
     private val _fisio = MutableLiveData<UserModel>()
     val fisio: LiveData<UserModel> get() = _fisio
 
-    fun traerFisio(){
+    fun traerFisio() {
         // Inicializamos las variables de autenticación y base de datos
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
@@ -59,4 +62,33 @@ class UserViewModel : ViewModel() {
 
         }
     }
+
+    fun actualizarDatosFisio(fisio: UserModel) {
+
+        // Actualizamos los datos en Firebase con corrutinas
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val userDocRef =
+                    db.collection("users").document(fisio.correo)
+
+                val datosActualizados = mapOf(
+                    "birth-date" to fisio.fechaNac,
+                    "name" to fisio.nombre,
+                    "lastname" to fisio.apellidos,
+                    "especialidad" to fisio.especialidad
+                )
+
+                userDocRef.update(datosActualizados).await()
+
+                withContext(Dispatchers.Main) {
+                    _toastMessage.postValue("Datos actualizados correctamente")
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    _toastMessage.postValue("Error al actualizar datos: ${e.message}")
+                }
+            }
+        }
+    }
+
 }

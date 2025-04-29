@@ -51,6 +51,31 @@
     <string name="fisioterapeuta">Fisioterapeuta</string>
     <string name="musica_on">Musica On</string>
     <string name="musica_off">Musica Off</string>
+    <string name="chat_de_fisioterapeutas">CHAT DE FISIOTERAPEUTAS</string>
+    <string name="a_adir">Añadir</string>
+    <string name="fisioappmain">FisioApp</string>
+    <string name="chat">CHAT</string>
+    <string name="tel_fono">Teléfono</string>
+    <string name="correo_electr_nico">Correo electrónico</string>
+    <string name="historial_m_dico">Historial Médico</string>
+    <string name="informaci_n_del_paciente">Información del paciente</string>
+    <string name="nombre_completo">Nombre Completo</string>
+    <string name="ltimo_diagn_stico">Último diagnóstico</string>
+    <string name="diagn_sticos">Diagnósticos</string>
+    <string name="fecha_del_diagn_stico">Fecha del diagnóstico</string>
+    <string name="fecha_de_inicio_del_tratamiento">Fecha de inicio del tratamiento</string>
+    <string name="fecha_de_fin_del_tratamiento">Fecha de fin del tratamiento</string>
+    <string name="observaciones_o_s_ntomas">Observaciones o síntomas</string>
+    <string name="medicamentos">Medicamentos</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="home">Home</string>
+    <string name="noticias">Noticias</string>
+    <string name="galer_a">Galería</string>
+    <string name="ajustes">Ajustes</string>
+    <string name="clientes">Clientes</string>
+    <string name="cerrar_sesi_n">Cerrar Sesión</string>
+    <string name="salir">Salir</string>
+    <string name="chat_menulateral">Chat</string>
 
     <string-array name="array_especialidades">
         <item>Ninguna</item>

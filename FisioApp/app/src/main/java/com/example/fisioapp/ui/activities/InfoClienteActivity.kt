@@ -112,8 +112,7 @@ class InfoClienteActivity : AppCompatActivity() {
             tvDireccion.text = "Dirección: " + c.direccion
             tvCorreo.text = "Correo electrónico: " + c.paciente_id
             tvTelefono.text = "Teléfono: " + c.telefono
-            tvFechaNacimiento.text =
-                "Fecha de nacimiento: " + c.fecha_nacimiento.convertirFechaDesdeBaseDeDatos()
+            tvFechaNacimiento.text = "Fecha de nacimiento: " + c.fecha_nacimiento.convertirFechaDesdeBaseDeDatos()
         }
     }
 

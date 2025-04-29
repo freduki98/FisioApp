@@ -83,9 +83,6 @@ class AppActivity : AppCompatActivity(){
         setMainConfig()
         setMenuLateral()
         setListeners()
-
-        viewModel.traerFisio()
-
     }
 
     private fun setViewModel() {
@@ -101,6 +98,8 @@ class AppActivity : AppCompatActivity(){
             headerView.findViewById<TextView>(R.id.header_title).setText(fisio.nombre + " " + fisio.apellidos)
             headerView.findViewById<TextView>(R.id.header_email).setText(fisio.correo)
         }
+
+        viewModel.traerFisio()
     }
 
     private fun setMainConfig() {
@@ -230,4 +229,6 @@ class AppActivity : AppCompatActivity(){
             replace(R.id.fcv, fragment)
         }
     }
+
+
 }

@@ -1,13 +1,14 @@
 package com.example.fisioapp.domain.models
 
+import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class ClienteModel(
-    val paciente_id: String,
-    val nombre: String,
-    val apellidos: String,
-    val direccion: String,
-    val telefono: String,
-    val fecha_nacimiento: String,
-    val fisio_id: String,
+    @SerializedName("paciente_id") var paciente_id: String,
+    @SerializedName("nombre") var nombre: String,
+    @SerializedName("apellidos") var apellidos: String,
+    @SerializedName("direccion") var direccion: String,
+    @SerializedName("telefono") var telefono: String,
+    @SerializedName("fecha_nacimiento") var fecha_nacimiento: String,
+    @SerializedName("fisio_id") var fisio_id: String
 ) : Serializable

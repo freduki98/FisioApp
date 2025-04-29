@@ -53,10 +53,9 @@ class ChatActivity : AppCompatActivity() {
 
     private fun inicializarComponentes() {
         auth = FirebaseAuth.getInstance()
-        // 🔁 NODO FIJO GLOBAL
         database = FirebaseDatabase.getInstance().getReference("chat").child("global")
         adapter = ChatAdapter(listaChat, auth.currentUser?.email.toString().encodeNode())
-        binding.tvContacto.text = "CHAT DE FISIOTERAPEUTAS"
+        binding.tvContacto.text = getString(R.string.chat_de_fisioterapeutas)
     }
 
     private fun setRecycler() {

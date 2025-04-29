@@ -27,10 +27,18 @@ class NoticiasFragment : Fragment(R.layout.fragment_noticias) {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = FragmentNoticiasBinding.inflate(inflater, container, false)
+        setAdapters()
+        setViewModel()
+        setRecycler()
+        return binding.root
+    }
 
+    private fun setAdapters() {
         // Inicializamos el adaptador
         adapter = NoticiaAdapter(lista) { noticia -> irWebNoticia(noticia) }
+    }
 
+    private fun setViewModel() {
         // Observamos el LiveData
         viewModel.listadoNoticias.observe(viewLifecycleOwner) {
             adapter.actualizarAdapter(it)
@@ -38,10 +46,6 @@ class NoticiasFragment : Fragment(R.layout.fragment_noticias) {
 
         // Llamamos a la función para traer las noticias
         viewModel.traerNoticiasFisio()
-
-        setRecycler()
-
-        return binding.root
     }
 
 

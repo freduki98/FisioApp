@@ -1,7 +1,6 @@
 package com.example.fisioapp.ui.activities
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -61,8 +60,19 @@ class AddClienteActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
-        binding.progressBar.visibility = View.VISIBLE
+        setViewModel()
+        recogerFisio()
+        recogerCliente()
+        setListener()
 
+        if (isUpdate) {
+            binding.tvTitle.text = "Editar cliente"
+            binding.btnEnviar.text = "Editar"
+            binding.btnEnviar.setBackgroundColor(ContextCompat.getColor(this, R.color.edit))
+        }
+    }
+
+    private fun setViewModel() {
         viewModel.clienteInsertado.observe(this) { exito ->
             if (exito) {
                 Toast.makeText(this, "Cliente insertado", Toast.LENGTH_SHORT).show()
@@ -80,16 +90,6 @@ class AddClienteActivity : AppCompatActivity() {
                 Toast.makeText(this, "No se ha podido editar el cliente", Toast.LENGTH_SHORT)
                     .show()
             }
-        }
-
-        recogerFisio()
-        recogerCliente()
-        setListener()
-
-        if (isUpdate) {
-            binding.tvTitle.text = "Editar cliente"
-            binding.btnEnviar.text = "Editar"
-            binding.btnEnviar.setBackgroundColor(ContextCompat.getColor(this, R.color.edit))
         }
     }
 
@@ -178,13 +178,13 @@ class AddClienteActivity : AppCompatActivity() {
             binding.etApellidos.error = "El apellido debe tener al menos 5 caracteres"
             return false
         } else if (direccion.length < 10 || direccion.length > 40) {
-            binding.etDireccion.error = "La direccion no tiene la longitud adecuada"
+            binding.etDireccion.error = "La dirección debe tener entre 10 y 40 caracteres"
             return false
         } else if (!correo_electronico.matches(Regex("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"))) {
-            binding.etCorreoElectronico.error = "El correo electrónico no es válido"
+            binding.etCorreoElectronico.error = "El correo electrónico no tiene un formato válido"
             return false
         }  else if (!telefono.matches(Regex("[0-9]{9}"))) {
-            binding.etTelefono.error = "El teléfono no es válido"
+            binding.etTelefono.error = "El teléfono debe tener 9 dígitos"
             return false
         }
 

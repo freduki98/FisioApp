@@ -38,10 +38,8 @@ class ClientesViewModel : ViewModel() {
     private val _diagnosticoInsertado = MutableLiveData<Boolean>()
     val diagnosticoInsertado: LiveData<Boolean> = _diagnosticoInsertado
 
-
     private val _diagnosticoEditado = MutableLiveData<Boolean>()
     val diagnosticoEditado: LiveData<Boolean> = _diagnosticoEditado
-
 
     private val _diagnosticoEliminado = MutableLiveData<Boolean>()
     val diagnosticoEliminado: LiveData<Boolean> = _diagnosticoEliminado

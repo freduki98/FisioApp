@@ -55,7 +55,7 @@ class InfoDiagnosticoActivity : AppCompatActivity() {
 
         binding.tvNombreDiagnostico.text = diagnostico?.id
         if (update) {
-            binding.btnActualizar.text = "Actualizar"
+            binding.btnActualizar.text = getString(R.string.actualizar)
             binding.btnActualizar.setBackgroundColor(ContextCompat.getColor(this, R.color.edit))
             viewModel.getDiagnosticoPaciente(
                 cliente!!.paciente_id,
@@ -63,7 +63,7 @@ class InfoDiagnosticoActivity : AppCompatActivity() {
                 diagnostico!!.id
             )
         } else {
-            binding.btnActualizar.text = "Añadir"
+            binding.btnActualizar.text = getString(R.string.a_adir)
             binding.btnActualizar.setBackgroundColor(ContextCompat.getColor(this, R.color.background_default))
             binding.btnEliminar.visibility = android.view.View.GONE
         }

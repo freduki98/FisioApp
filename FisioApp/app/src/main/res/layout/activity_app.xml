@@ -37,7 +37,7 @@
                     android:background="@color/background_default"
                     app:navigationIcon="@drawable/menu_hamburguesa"
                     app:titleTextColor="@color/white"
-                    app:title="FisioApp" />
+                    app:title="@string/fisioappmain" />
 
             </com.google.android.material.appbar.AppBarLayout>
 

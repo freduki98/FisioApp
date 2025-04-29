@@ -29,7 +29,7 @@
         android:textColor="@color/white"
         android:gravity="center"
         android:padding="16dp"
-        android:text="Diagnósticos"
+        android:text="@string/diagn_sticos"
         android:textSize="22sp"
         android:textStyle="bold" />
 </androidx.cardview.widget.CardView>

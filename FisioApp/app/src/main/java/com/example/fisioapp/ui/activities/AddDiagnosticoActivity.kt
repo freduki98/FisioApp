@@ -55,7 +55,6 @@ class AddDiagnosticoActivity : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
 
         recogeCliente()
-
         setAdapter()
         setViewModel()
         setListener()
