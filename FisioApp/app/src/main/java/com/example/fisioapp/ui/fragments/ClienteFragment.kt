@@ -1,34 +1,36 @@
-package com.example.fisioapp.ui.activities
+package com.example.fisioapp.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fisioapp.R
-import com.example.fisioapp.databinding.ActivityClientesBinding
+import com.example.fisioapp.databinding.FragmentClienteBinding
 import com.example.fisioapp.domain.models.ClienteModel
+import com.example.fisioapp.ui.activities.AddClienteActivity
+import com.example.fisioapp.ui.activities.InfoClienteActivity
 import com.example.fisioapp.ui.adapters.ClienteAdapter
 import com.example.fisioapp.ui.viewmodels.ClientesViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class ClientesActivity : AppCompatActivity() {
+class ClienteFragment : Fragment(R.layout.fragment_cliente) {
 
-    private lateinit var binding: ActivityClientesBinding
+    private lateinit var binding: FragmentClienteBinding
 
     // Adapter
     private var lista = mutableListOf<ClienteModel>()
     lateinit var adapter: ClienteAdapter
 
-    private val viewModel : ClientesViewModel by viewModels()
+    private val viewModel: ClientesViewModel by viewModels()
 
     // Variables de autenticación y base de datos
     private lateinit var auth: FirebaseAuth
@@ -36,18 +38,14 @@ class ClientesActivity : AppCompatActivity() {
 
     private var fisio_id = ""
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
 
-        binding = ActivityClientesBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentClienteBinding.inflate(layoutInflater)
+        setViewModel()
 
         // Inicializamos las variables de autenticación y base de datos
         auth = FirebaseAuth.getInstance()
@@ -59,6 +57,8 @@ class ClientesActivity : AppCompatActivity() {
         setViewModel()
         setListener()
         setRecycler()
+
+        return binding.root
     }
 
     private fun inhabilitarComponentes() {
@@ -71,28 +71,48 @@ class ClientesActivity : AppCompatActivity() {
     }
 
     private fun setViewModel() {
-        viewModel.listadoClientes.observe(this){
+        viewModel.listadoClientes.observe(viewLifecycleOwner) {
             if (it != null) {
-                adapter.actualizarAdapter(it.sortedBy {it.nombre})
+                adapter.actualizarAdapter(it.sortedBy { it.nombre })
                 binding.fabAdd.isEnabled = true
                 binding.searchView.isEnabled = true
+
+                if (it.isEmpty()) {
+                    binding.tvNoClientes.visibility = View.VISIBLE
+                } else {
+                    binding.tvNoClientes.visibility = View.INVISIBLE
+                }
             }
         }
 
-        viewModel.clienteEliminado.observe(this){ exito ->
-            if(exito){
-                Toast.makeText(this, "Cliente eliminado", Toast.LENGTH_SHORT).show()
-            }else{
-                Toast.makeText(this, "No se ha podido eliminar el cliente", Toast.LENGTH_SHORT).show()
+        viewModel.clienteEliminado.observe(viewLifecycleOwner) { exito ->
+            if (exito) {
+                Toast.makeText(requireContext(), "Cliente eliminado", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "No se ha podido eliminar el cliente",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
-        // Observa el LiveData para los Toasts
-        viewModel.toastMessage.observe(this, Observer { message ->
+        viewModel.exito.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.ivInternet.visibility = View.INVISIBLE
+            } else {
+                binding.ivInternet.visibility = View.VISIBLE
+                binding.fabAdd.isEnabled = false
+                binding.searchView.isEnabled = false
+            }
+        }
+
+        // Observa el LiveData para los Toasts de error de conexión
+        viewModel.toastMessage.observe(viewLifecycleOwner, Observer { message ->
             message?.let {
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }
-            finish()
+
         })
 
 
@@ -110,12 +130,12 @@ class ClientesActivity : AppCompatActivity() {
 
     private fun setListener() {
         binding.fabAdd.setOnClickListener {
-            startActivity(Intent(this, AddClienteActivity::class.java))
+            startActivity(Intent(requireContext(), AddClienteActivity::class.java))
         }
         // listener para el searchView
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if(binding.searchView.isEnabled){
+                if (binding.searchView.isEnabled) {
                     val searchQuery = query?.trim()?.lowercase() ?: ""
                     if (searchQuery.isNotEmpty()) {
                         viewModel.traerCliente(searchQuery, fisio_id)
@@ -127,7 +147,7 @@ class ClientesActivity : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 val searchQuery = newText?.trim()?.lowercase() ?: ""
 
-                if(binding.searchView.isEnabled){
+                if (binding.searchView.isEnabled) {
                     if (searchQuery.isNotEmpty()) {
                         viewModel.traerCliente(searchQuery, fisio_id)
                     } else {
@@ -141,12 +161,12 @@ class ClientesActivity : AppCompatActivity() {
     }
 
     private fun setRecycler() {
-        binding.recyclerViewClientes.layoutManager = LinearLayoutManager(this)
+        binding.recyclerViewClientes.layoutManager = LinearLayoutManager(requireContext())
         traerClientes()
     }
 
     private fun onClickCliente(cliente: ClienteModel) {
-        val i = Intent(this, InfoClienteActivity::class.java)
+        val i = Intent(requireContext(), InfoClienteActivity::class.java)
         i.putExtra("CLIENTE", cliente)
         startActivity(i)
     }
@@ -158,8 +178,8 @@ class ClientesActivity : AppCompatActivity() {
     }
 
 
-    private fun borrarCliente(c : ClienteModel) {
-        MaterialAlertDialogBuilder(this)
+    private fun borrarCliente(c: ClienteModel) {
+        MaterialAlertDialogBuilder(requireContext())
             .setTitle("Confirmar acción")
             .setMessage("¿Está seguro de que desea eliminar al cliente?")
             .setPositiveButton("Aceptar") { dialog, _ ->
@@ -167,14 +187,14 @@ class ClientesActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
             .setNegativeButton("Cancelar") { dialog, _ ->
-                Toast.makeText(this, "Cliente no eliminado", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Cliente no eliminado", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
             }
             .show()
     }
 
     private fun actualizarCliente(c: ClienteModel) {
-        val i = Intent(this, AddClienteActivity::class.java).apply {
+        val i = Intent(requireContext(), AddClienteActivity::class.java).apply {
             putExtra("CLIENTE", c)
         }
         startActivity(i)
@@ -183,9 +203,15 @@ class ClientesActivity : AppCompatActivity() {
     // ---------------------------------------------------------------------------------------------
 
 
-    override fun onRestart() {
-        super.onRestart()
-        setRecycler()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        traerClientes()
     }
+
+    override fun onResume() {
+        super.onResume()
+        traerClientes()
+    }
+
 
 }

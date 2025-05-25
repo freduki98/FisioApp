@@ -1,6 +1,7 @@
 package com.example.fisioapp.ui.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -19,6 +20,9 @@ import com.example.fisioapp.utils.convertirFecha
 import com.example.fisioapp.utils.convertirFechaDesdeBaseDeDatos
 import com.example.fisioapp.utils.mostrarDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class InfoDiagnosticoActivity : AppCompatActivity() {
 
@@ -165,15 +169,15 @@ class InfoDiagnosticoActivity : AppCompatActivity() {
 
         // Mostrar el DatePickerDialog al hacer clic en el EditText
         binding.etFechaDiagnostico.setOnClickListener {
-            binding.etFechaDiagnostico.mostrarDatePicker(this)
+            binding.etFechaDiagnostico.mostrarDatePicker(this, true)
         }
 
         binding.etFechaInicioTratamiento.setOnClickListener {
-            binding.etFechaInicioTratamiento.mostrarDatePicker(this)
+            binding.etFechaInicioTratamiento.mostrarDatePicker(this, false)
         }
 
         binding.etFechaFinTratamiento.setOnClickListener {
-            binding.etFechaFinTratamiento.mostrarDatePicker(this)
+            binding.etFechaFinTratamiento.mostrarDatePicker(this, false)
         }
     }
 
@@ -197,6 +201,10 @@ class InfoDiagnosticoActivity : AppCompatActivity() {
     }
 
     private fun comprobarCampos(): Boolean {
+
+        val formatoFecha = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        formatoFecha.isLenient = false
+
         fecha_diagnostico = binding.etFechaDiagnostico.text.toString().convertirFecha()
         fecha_inicio_tratamiento = binding.etFechaInicioTratamiento.text.toString().convertirFecha()
         fecha_fin_tratamiento = binding.etFechaFinTratamiento.text.toString().convertirFecha()
@@ -212,9 +220,75 @@ class InfoDiagnosticoActivity : AppCompatActivity() {
             return false
         }
 
+        if (fecha_inicio_tratamiento == null) {
+            Toast.makeText(
+                this,
+                "La fecha del inicio de tratamiento no puede estar vacía",
+                Toast.LENGTH_SHORT
+            ).show()
+            return false
+        }
+
+        if (fecha_fin_tratamiento == null) {
+            Toast.makeText(
+                this,
+                "La fecha del fin de tratamiento no puede estar vacía",
+                Toast.LENGTH_SHORT
+            ).show()
+            return false
+        }
+
+        // Convertir las fechas de string a Date
+        val fechaDiagnosticoDate: Date? = try {
+            if (fecha_diagnostico!!.isNotEmpty()) formatoFecha.parse(fecha_diagnostico) else null
+        } catch (e: Exception) {
+            null
+        }
+
+        Log.d("fecha diagnostico", fechaDiagnosticoDate.toString())
+
+        // Convertir las fechas de string a Date
+        val fechaInicioDate: Date? = try {
+            if (fecha_inicio_tratamiento!!.isNotEmpty()) formatoFecha.parse(fecha_inicio_tratamiento) else null
+        } catch (e: Exception) {
+            null
+        }
+
+        Log.d("fecha inicio tratamiento", fechaInicioDate.toString())
+
+        // Convertir las fechas de string a Date
+        val fechaFinDate: Date? = try {
+            if (fecha_fin_tratamiento!!.isNotEmpty()) formatoFecha.parse(fecha_fin_tratamiento) else null
+        } catch (e: Exception) {
+            null
+        }
+
+        Log.d("fecha fin tratamiento", fechaFinDate.toString())
+
         if (sintomas == "") {
             Toast.makeText(this, "Los síntomas no pueden estar vacíos", Toast.LENGTH_SHORT).show()
             return false
+        }
+
+        if (medicamentos == "") {
+            Toast.makeText(this, "Los medicamentos no pueden estar vacíos", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+
+        // Validación de fechas
+        if (fechaInicioDate != null) {
+            if (fechaInicioDate.before(fechaDiagnosticoDate) || fechaInicioDate == fechaDiagnosticoDate) {
+                Toast.makeText(this, "La fecha de inicio no puede ser anterior o igual al diagnóstico", Toast.LENGTH_SHORT).show()
+                return false
+            }
+        }
+
+        if (fechaFinDate != null) {
+            if (fechaFinDate.before(fechaInicioDate) || fechaFinDate == fechaInicioDate) {
+                Toast.makeText(this, "La fecha de fin no puede ser anterior o igual a la de inicio", Toast.LENGTH_SHORT).show()
+                return false
+            }
         }
 
         return true

@@ -6,20 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_default"
+    android:fitsSystemWindows="true"
     tools:context=".ui.activities.ChatActivity">
 
 
-    <!-- Barra superior con nombre de contacto y botón de retroceso -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_correoContacto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="8dp"
-        android:paddingStart="12dp"
         app:cardBackgroundColor="@color/background_default"
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="6dp"
         app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,17 +28,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="12dp">
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tvContacto"
+                android:id="@+id/tvChat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center"
-                android:padding="12dp"
+                android:padding="15dp"
                 android:text="@string/chat"
                 android:textColor="@color/white"
                 android:textSize="18sp"
@@ -58,11 +56,37 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/bg_rounded"
-        android:backgroundTint="@color/rosado_claro"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/card_correoContacto" />
+
+    <!-- Campo para escribir mensaje -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutEscribiendo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@id/rv_chat"
+        app:layout_constraintStart_toStartOf="@id/rv_chat"
+        app:layout_constraintTop_toTopOf="@id/rv_chat">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etMsnEscribiendo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded_chat"
+            android:inputType="textMultiLine"
+            android:maxLines="5"
+            android:minLines="1"
+            android:gravity="top|start"
+            android:scrollbars="vertical"
+            android:overScrollMode="always"
+            android:textColorHint="@color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Campo para escribir mensaje -->
     <com.google.android.material.textfield.TextInputLayout
@@ -76,6 +100,8 @@
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopStart="12dp"
         app:hintTextColor="@color/black"
+        android:hint="@string/escribe_tu_mensaje"
+        app:hintEnabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnEnviarChat"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,7 +112,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_rounded"
-            android:hint="@string/escribe_tu_mensaje"
             android:inputType="text"
             android:textColorHint="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -97,14 +122,13 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="6dp"
-        android:layout_marginEnd="12dp"
-        android:paddingEnd="13dp"
-        android:textAllCaps="false"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="6dp"
+        android:paddingStart="31dp"
         android:textColor="@android:color/black"
         app:backgroundTint="@color/white"
         app:cornerRadius="12dp"
         app:icon="@android:drawable/ic_menu_send"
-        app:iconGravity="textStart"
         app:iconSize="25dp"
         app:iconTint="@color/black"
         app:layout_constraintBottom_toBottomOf="@id/textInputLayout"

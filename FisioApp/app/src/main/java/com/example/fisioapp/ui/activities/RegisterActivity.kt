@@ -44,6 +44,14 @@ class RegisterActivity : AppCompatActivity() {
         if (intent.extras != null) {
             email = intent.getStringExtra("email").toString()
             pass = intent.getStringExtra("pass").toString()
+
+            if (email.equals("null")) {
+                email = ""
+            }
+            if (pass.equals("null")) {
+                pass = ""
+            }
+
             binding.etCorreoRegister.setText(email)
             binding.etPassRegister.setText(pass)
         }
@@ -69,7 +77,7 @@ class RegisterActivity : AppCompatActivity() {
         }
         // Mostrar el DatePickerDialog al hacer clic en el EditText
         binding.etFechaNacRegister.setOnClickListener {
-            binding.etFechaNacRegister.mostrarDatePicker(this)
+            binding.etFechaNacRegister.mostrarDatePicker(this, true)
         }
     }
 

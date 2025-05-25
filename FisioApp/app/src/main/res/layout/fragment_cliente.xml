@@ -4,32 +4,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_default"
-    tools:context=".ui.activities.ClientesActivity">
+    tools:context=".ui.fragments.ClienteFragment">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_misClientes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardUseCompatPadding="true"
-        android:background="@color/background_default"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/tvVideos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingTop="25dp"
-            android:paddingBottom="15dp"
-            android:textColor="@color/white"
-            android:background="@color/background_default"
-            android:text="@string/mis_clientes"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-    </androidx.cardview.widget.CardView>
 
     <SearchView
         android:id="@+id/searchView"
@@ -43,7 +19,7 @@
         android:queryHint="@string/nombre"
         app:layout_constraintEnd_toStartOf="@+id/fab_add"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card_misClientes" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewClientes"
@@ -71,15 +47,29 @@
         app:tint="#000000" />
 
     <ImageView
-        android:id="@+id/ivClientes"
+        android:id="@+id/ivInternet"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        android:layout_margin="100dp"
+        android:scaleType="centerInside"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/network_signal"/>
+
+    <TextView
+        android:id="@+id/tv_no_clientes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="AÚN NO TIENE PACIENTES... ¡AÑADE UNO!"
+        android:textSize="16sp"
+        android:layout_margin="20dp"
+        android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

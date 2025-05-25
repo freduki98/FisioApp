@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.get
 import androidx.fragment.app.viewModels
@@ -13,9 +14,11 @@ import androidx.lifecycle.lifecycleScope
 import com.example.fisioapp.R
 import com.example.fisioapp.databinding.FragmentAjustesBinding
 import com.example.fisioapp.domain.models.UserModel
+import com.example.fisioapp.ui.activities.AppActivity
 import com.example.fisioapp.ui.viewmodels.ClientesViewModel
 import com.example.fisioapp.ui.viewmodels.UserViewModel
 import com.example.fisioapp.utils.mostrarDatePicker
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -56,6 +59,7 @@ class AjustesFragment : Fragment(R.layout.fragment_ajustes) {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAjustesBinding.inflate(inflater, container, false)
+        setViewModel()
         return binding.root
     }
 
@@ -63,8 +67,6 @@ class AjustesFragment : Fragment(R.layout.fragment_ajustes) {
         super.onViewCreated(view, savedInstanceState)
 
         setAdapters()
-        setViewModel()
-        viewModel.traerFisio()
         setListeners()
     }
 
@@ -99,6 +101,8 @@ class AjustesFragment : Fragment(R.layout.fragment_ajustes) {
         viewModel.toastMessage.observe(viewLifecycleOwner) {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
+
+        viewModel.traerFisio()
     }
 
 
@@ -108,7 +112,7 @@ class AjustesFragment : Fragment(R.layout.fragment_ajustes) {
 
         // Configuramos el OnClickListener para el EditText de la fecha de nacimiento
         binding.etFechaNacRegister.setOnClickListener {
-            binding.etFechaNacRegister.mostrarDatePicker(requireContext())
+            binding.etFechaNacRegister.mostrarDatePicker(requireContext(), true)
         }
 
         binding.btnGuardarDatos.setOnClickListener {
@@ -128,6 +132,9 @@ class AjustesFragment : Fragment(R.layout.fragment_ajustes) {
                     especialidad
                 )
             )
+
+            val activity = requireActivity() as AppActivity
+            activity.actualizarHeader(nombre, apellidos, auth.currentUser?.email.toString())
         }
 
     }

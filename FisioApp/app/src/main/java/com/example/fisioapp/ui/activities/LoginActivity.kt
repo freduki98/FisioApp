@@ -207,12 +207,17 @@ class LoginActivity : AppCompatActivity() {
     private fun register() {
         // Ir a la pantalla de registro con los datos del usuario si son correctos
         val i = Intent(this, RegisterActivity::class.java)
-        if (datosCorrectos()) {
-            i.apply {
-                putExtra("email", email)
-                putExtra("pass", pass)
-            }
+
+        email = binding.etEmail.text.toString().trim()
+        if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            i.putExtra("email", email)
         }
+
+        pass = binding.etPass.text.toString().trim()
+        if (pass.length >= 8) {
+            i.putExtra("pass", pass)
+        }
+
         launcherAccount.launch(i)
     }
 

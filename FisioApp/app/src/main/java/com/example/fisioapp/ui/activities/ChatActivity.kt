@@ -2,9 +2,12 @@ package com.example.fisioapp.ui.activities
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
+import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -39,6 +42,7 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityChatBinding.inflate(layoutInflater)
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -55,7 +59,9 @@ class ChatActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().getReference("chat").child("global")
         adapter = ChatAdapter(listaChat, auth.currentUser?.email.toString().encodeNode())
-        binding.tvContacto.text = getString(R.string.chat_de_fisioterapeutas)
+        binding.tvChat.text = getString(R.string.chat_de_fisioterapeutas)
+        binding.textInputLayoutEscribiendo.visibility = View.GONE
+        binding.etMsnEscribiendo.isEnabled = false
     }
 
     private fun setRecycler() {
@@ -64,6 +70,14 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun setListeners() {
+
+        binding.etMsnChat.setOnClickListener {
+            if(!binding.etMsnChat.text.isNullOrBlank()){
+                binding.textInputLayoutEscribiendo.visibility = View.VISIBLE
+            }
+        }
+
+
         binding.btnEnviarChat.setOnClickListener {
             enviarMensaje()
         }
@@ -91,11 +105,34 @@ class ChatActivity : AppCompatActivity() {
             ) {
                 enviarMensaje()
                 ocultarTeclado()
+                binding.textInputLayoutEscribiendo.visibility = View.GONE
                 true
             } else {
                 false
             }
         }
+
+        binding.etMsnChat.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Si hay texto, mostrar el componente
+                if (s != null) {
+                    if (!s.isNullOrBlank()) {
+                        binding.textInputLayoutEscribiendo.visibility = View.VISIBLE
+                        binding.etMsnEscribiendo.text = binding.etMsnChat.text
+                    } else {
+                        binding.textInputLayoutEscribiendo.visibility = View.GONE
+                        binding.etMsnEscribiendo.text = null
+                    }
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+
+
     }
 
     private fun ocultarTeclado() {

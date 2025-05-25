@@ -7,11 +7,6 @@
         android:title="@string/chat_menulateral" />
 
     <item
-        android:id="@+id/item_clientes"
-        android:icon="@drawable/ic_cliente"
-        android:title="@string/clientes" />
-
-    <item
         android:id="@+id/item_cerrar_sesion"
         android:icon="@drawable/ic_cerrar_sesion"
         android:title="@string/cerrar_sesi_n" />

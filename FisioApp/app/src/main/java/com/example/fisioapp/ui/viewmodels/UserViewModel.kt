@@ -1,5 +1,6 @@
 package com.example.fisioapp.ui.viewmodels
 
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.LiveData
@@ -7,7 +8,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
+import com.example.fisioapp.R
 import com.example.fisioapp.domain.models.UserModel
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
@@ -46,6 +49,14 @@ class UserViewModel : ViewModel() {
                 var apellidos = resultado.get("lastname").toString()
                 var fechaNac = resultado.get("birth-date").toString()
                 var especialidad = resultado.get("especialidad").toString()
+
+                if(nombre == "null"){
+                    nombre = ""
+                }
+                if(apellidos == "null"){
+                    apellidos = ""
+                }
+
 
                 val fisio = UserModel(correo, nombre, apellidos, fechaNac, especialidad)
                 _fisio.postValue(fisio)
@@ -89,6 +100,9 @@ class UserViewModel : ViewModel() {
                 }
             }
         }
+
+        traerFisio()
+
     }
 
 }

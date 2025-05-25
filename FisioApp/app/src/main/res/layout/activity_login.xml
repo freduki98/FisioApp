@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:padding="15dp"
     android:backgroundTintMode="screen"
     tools:context=".ui.activities.LoginActivity">
 
@@ -14,16 +13,15 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_correo"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:hint="@string/correo_electr_nico"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="25dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_tituloIntro"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        >
+        app:layout_constraintBottom_toTopOf="@+id/til_contrasena"
+        app:layout_constraintEnd_toEndOf="@+id/tv_tituloIntro"
+        app:layout_constraintStart_toStartOf="@+id/tv_tituloIntro"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tituloIntro">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_email"
@@ -36,17 +34,19 @@
         android:id="@+id/btn_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
         android:backgroundTint="@color/edit"
         android:text="@string/crear_cuenta"
-        app:cornerRadius="12dp"
         android:textColor="#000000"
         android:textColorLink="#FFFFFF"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton"
         app:layout_constraintEnd_toStartOf="@+id/btn_login"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_contrasena" />
+        app:layout_constraintTop_toBottomOf="@+id/til_contrasena"
+        app:layout_constraintVertical_bias="0.5" />
 
+    <!-- Contraseña -->
     <Button
         android:id="@+id/btn_login"
         android:layout_width="wrap_content"
@@ -62,20 +62,19 @@
         app:layout_constraintStart_toEndOf="@+id/btn_register"
         app:layout_constraintTop_toTopOf="@+id/btn_register" />
 
-    <!-- Contraseña -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_contrasena"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:hint="@string/contrase_a"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="25dp"
-        app:layout_constraintTop_toBottomOf="@id/til_correo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        >
+        app:layout_constraintBottom_toTopOf="@+id/btn_register"
+        app:layout_constraintEnd_toEndOf="@+id/til_correo"
+        app:layout_constraintStart_toStartOf="@+id/til_correo"
+        app:layout_constraintTop_toBottomOf="@+id/til_correo"
+        app:layout_constraintVertical_bias="0.5">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_pass"
@@ -88,31 +87,31 @@
         android:id="@+id/tv_tituloIntro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:text="@string/fisioapp"
         android:textColor="#000000"
         android:textSize="30sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/til_correo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
         android:id="@+id/buttonGoogle"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="25dp"
-        app:cornerRadius="12dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:backgroundTint="@color/background_default"
         android:drawableLeft="@drawable/googleg_standard_color_18"
         android:text="@string/iniciar_sesion_con_google"
         android:textColor="@color/white"
+        app:cornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton"
+        app:layout_constraintVertical_bias="0.5" />
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -124,9 +123,9 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/buttonGoogle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_register"
+        app:layout_constraintVertical_bias="0.5"
         app:srcCompat="@drawable/massage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

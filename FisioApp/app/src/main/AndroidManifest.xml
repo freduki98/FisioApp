@@ -18,16 +18,20 @@
         tools:targetApi="31">
         <activity
             android:name=".ui.activities.InfoDiagnosticoActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activities.AddDiagnosticoActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activities.HistorialClienteActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activities.InfoClienteActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activities.ClientesActivity"
             android:exported="false"

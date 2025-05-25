@@ -59,7 +59,7 @@ fun String.convertirFechaDesdeBaseDeDatos(): String {
 
 
 // Función para mostrar el DatePicker, un dialog personalizado para que el usuario pueda seleccionar la fecha
-fun EditText.mostrarDatePicker(requireContext: Context) {
+fun EditText.mostrarDatePicker(requireContext: Context, maxToday: Boolean) {
     val calendario = Calendar.getInstance()
     val año = calendario.get(Calendar.YEAR)
     val mes = calendario.get(Calendar.MONTH)
@@ -77,8 +77,10 @@ fun EditText.mostrarDatePicker(requireContext: Context) {
         dia
     )
 
-    // Restringimos fechas futuras
-    datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
+    // Restringimos fechas si es una fecha de nacimiento
+    if (maxToday) {
+        datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
+    }
 
     // Mostramos el DatePicker
     datePickerDialog.show()

@@ -13,27 +13,41 @@
         android:id="@+id/tv_titulo_registro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:text="NUEVO REGISTRO"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/diviserLine"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/diviserLine"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/edit"
+        android:max="100"
+        android:progress="0"
+        app:layout_constraintBottom_toTopOf="@+id/etNombreRegisterLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_titulo_registro" />
 
     <!-- TextInputLayout para Nombre -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etNombreRegisterLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_titulo_registro">
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/etApellidosRegisterLayout"
+        app:layout_constraintEnd_toEndOf="@+id/etApellidosRegisterLayout"
+        app:layout_constraintStart_toStartOf="@+id/etApellidosRegisterLayout"
+        app:layout_constraintTop_toBottomOf="@+id/diviserLine"
+        app:layout_constraintVertical_bias="0.5">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etnombreRegister"
@@ -49,13 +63,13 @@
         android:id="@+id/etApellidosRegisterLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNombreRegisterLayout">
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/etFechaNacRegisterLayout"
+        app:layout_constraintEnd_toEndOf="@+id/etFechaNacRegisterLayout"
+        app:layout_constraintStart_toStartOf="@+id/etFechaNacRegisterLayout"
+        app:layout_constraintTop_toBottomOf="@+id/etNombreRegisterLayout"
+        app:layout_constraintVertical_bias="0.5">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etApellidosRegister"
@@ -71,28 +85,27 @@
         android:id="@+id/btnGuardarRegistro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:text="@string/registrarse"
         android:backgroundTint="@color/edit"
+        android:text="@string/registrarse"
         android:textColor="@color/black"
         app:cornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPassRegisterLayout"/>
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etCorreoRegisterLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etFechaNacRegisterLayout">
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/etPassRegisterLayout"
+        app:layout_constraintEnd_toEndOf="@+id/etPassRegisterLayout"
+        app:layout_constraintStart_toStartOf="@+id/etPassRegisterLayout"
+        app:layout_constraintTop_toBottomOf="@+id/etFechaNacRegisterLayout"
+        app:layout_constraintVertical_bias="0.5">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etCorreoRegister"
@@ -108,12 +121,11 @@
         android:id="@+id/etPassRegisterLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnGuardarRegistro"
         app:layout_constraintTop_toBottomOf="@+id/etCorreoRegisterLayout">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -130,13 +142,13 @@
         android:id="@+id/etFechaNacRegisterLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etApellidosRegisterLayout">
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/etCorreoRegisterLayout"
+        app:layout_constraintEnd_toEndOf="@+id/etCorreoRegisterLayout"
+        app:layout_constraintStart_toStartOf="@+id/etCorreoRegisterLayout"
+        app:layout_constraintTop_toBottomOf="@+id/etApellidosRegisterLayout"
+        app:layout_constraintVertical_bias="0.5">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etFechaNacRegister"

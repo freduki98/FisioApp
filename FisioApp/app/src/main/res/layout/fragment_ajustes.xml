@@ -13,11 +13,10 @@
         android:id="@+id/et_nombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:hint="@string/nombre"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/et_apellidos"
+        app:layout_constraintEnd_toEndOf="@+id/et_apellidos"
+        app:layout_constraintStart_toStartOf="@+id/et_apellidos"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -35,12 +34,12 @@
         android:id="@+id/et_apellidos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:hint="@string/apellidos"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_nombre">
+        app:layout_constraintBottom_toTopOf="@+id/etFecha"
+        app:layout_constraintEnd_toEndOf="@+id/etFecha"
+        app:layout_constraintStart_toStartOf="@+id/etFecha"
+        app:layout_constraintTop_toBottomOf="@+id/et_nombre"
+        app:layout_constraintVertical_bias="0.5">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_apellidos_perfil"
@@ -57,12 +56,12 @@
         android:id="@+id/etFecha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:hint="@string/fecha_de_nacimiento"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_apellidos">
+        app:layout_constraintBottom_toTopOf="@+id/tv_especialidad"
+        app:layout_constraintEnd_toEndOf="@+id/tv_especialidad"
+        app:layout_constraintStart_toStartOf="@+id/tv_especialidad"
+        app:layout_constraintTop_toBottomOf="@+id/et_apellidos"
+        app:layout_constraintVertical_bias="0.5">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etFechaNacRegister"
@@ -82,33 +81,34 @@
         android:layout_height="wrap_content"
         android:text="@string/especialidad"
         android:textSize="18sp"
-        android:layout_marginTop="50dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etFecha" />
+        app:layout_constraintBottom_toTopOf="@+id/spinnerEspecialidad"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerEspecialidad"
+        app:layout_constraintStart_toStartOf="@+id/spinnerEspecialidad"
+        app:layout_constraintTop_toBottomOf="@+id/etFecha"
+        app:layout_constraintVertical_bias="0.5" />
 
     <Spinner
         android:id="@+id/spinnerEspecialidad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:padding="20dp"
         android:background="@drawable/border"
+        android:padding="20dp"
         android:spinnerMode="dialog"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_especialidad" />
+        app:layout_constraintBottom_toTopOf="@+id/btnGuardarDatos"
+        app:layout_constraintTop_toBottomOf="@+id/tv_especialidad"
+        app:layout_constraintVertical_bias="0.5"
+        tools:layout_editor_absoluteX="24dp" />
 
     <Button
         android:id="@+id/btnGuardarDatos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/edit"
         android:text="@string/actualizar"
         app:cornerRadius="12dp"
-        android:backgroundTint="@color/edit"
+        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

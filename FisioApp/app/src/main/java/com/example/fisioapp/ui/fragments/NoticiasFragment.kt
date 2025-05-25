@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fisioapp.R
 import com.example.fisioapp.ui.activities.WebNoticiaActivity
@@ -44,6 +46,20 @@ class NoticiasFragment : Fragment(R.layout.fragment_noticias) {
             adapter.actualizarAdapter(it)
         }
 
+        viewModel.exito.observe(viewLifecycleOwner){
+            if(it){
+                binding.ivNoticias.visibility = View.INVISIBLE
+            } else {
+                binding.ivNoticias.visibility = View.VISIBLE
+            }
+        }
+
+        // Observa el LiveData para los Toasts de error de conexión
+        viewModel.toastMessage.observe(viewLifecycleOwner, Observer { message ->
+            message?.let {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            }
+        })
         // Llamamos a la función para traer las noticias
         viewModel.traerNoticiasFisio()
     }

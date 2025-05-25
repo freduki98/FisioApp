@@ -46,7 +46,7 @@ class ChatViewHolder(v: View) : RecyclerView.ViewHolder(v) {
 
         // Desplazamos el constraint layout a la derecha si el mensaje es del usuario
         if (mensaje.user == user) {
-            binding.clChat.setBackgroundColor(binding.tvEmail.context.getColor(R.color.white))
+            binding.clChat.setBackgroundColor(binding.tvEmail.context.getColor(R.color.sintomas))
             params.marginStart = 100
             params.marginEnd = 0
 

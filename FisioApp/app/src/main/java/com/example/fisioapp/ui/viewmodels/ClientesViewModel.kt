@@ -53,8 +53,10 @@ class ClientesViewModel : ViewModel() {
     private val _diagnosticoPaciente = MutableLiveData<DiagnosticoPaciente?>()
     val diagnosticoPaciente: MutableLiveData<DiagnosticoPaciente?> = _diagnosticoPaciente
 
-    // LiveData para mostrar el mensaje del Toast //
+    private val _exito = MutableLiveData<Boolean>()
+    val exito: LiveData<Boolean> = _exito
 
+    // LiveData para mostrar el mensaje del Toast //
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
 
@@ -66,27 +68,32 @@ class ClientesViewModel : ViewModel() {
                 val resultado = withTimeout(5000) {
                     val datos = repository.getClientesApi(fisio_id)
                     _listadoClientes.postValue(datos)
+                    _exito.postValue(true)
                 }
             } catch (e: TimeoutCancellationException) {
                 // ❌ No hubo respuesta en 5 segundos
                 withContext(Dispatchers.Main) {
                     _toastMessage.postValue("La solicitud tardó demasiado. Intenta nuevamente.")
                 }
+                _exito.postValue(false)
             } catch (e: IOException) {
                 // ❌ Problemas de red (por ejemplo, no hay conexión)
                 withContext(Dispatchers.Main) {
                     _toastMessage.postValue("No hay conexión a la red. Verifica tu conexión a internet.")
                 }
+                _exito.postValue(false)
             } catch (e: HttpException) {
                 // ❌ Error del servidor (por ejemplo, respuesta 500, 404, etc.)
                 withContext(Dispatchers.Main) {
                     _toastMessage.postValue("Error en el servidor. Intenta más tarde.")
                 }
+                _exito.postValue(false)
             } catch (e: Exception) {
                 // ❌ Captura cualquier otro error general
                 withContext(Dispatchers.Main) {
                     _toastMessage.postValue("Ocurrió un error inesperado. Intenta nuevamente.")
                 }
+                _exito.postValue(false)
             }
         }
     }
@@ -103,21 +110,25 @@ class ClientesViewModel : ViewModel() {
                 withContext(Dispatchers.Main) {
                     _toastMessage.postValue("La solicitud tardó demasiado. Intenta nuevamente.")
                 }
+                _listadoClientes.postValue(null)
             } catch (e: IOException) {
                 // ❌ No hay conexión a la red
                 withContext(Dispatchers.Main) {
                     _toastMessage.postValue("No hay conexión a la red. Verifica tu conexión a internet.")
                 }
+                _listadoClientes.postValue(null)
             } catch (e: HttpException) {
                 // ❌ Error del servidor (por ejemplo, 500, 404)
                 withContext(Dispatchers.Main) {
                     _toastMessage.postValue("Error en el servidor. Intenta más tarde.")
                 }
+                _listadoClientes.postValue(null)
             } catch (e: Exception) {
                 // ❌ Error general
                 withContext(Dispatchers.Main) {
                     _toastMessage.postValue("Ocurrió un error inesperado. Intenta nuevamente.")
                 }
+                _listadoClientes.postValue(null)
             }
         }
     }

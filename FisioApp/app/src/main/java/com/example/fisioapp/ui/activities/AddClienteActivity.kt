@@ -1,6 +1,7 @@
 package com.example.fisioapp.ui.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -66,7 +67,7 @@ class AddClienteActivity : AppCompatActivity() {
         setListener()
 
         if (isUpdate) {
-            binding.tvTitle.text = "Editar cliente"
+            binding.tvTitle.text = "EDITAR CLIENTE"
             binding.btnEnviar.text = "Editar"
             binding.btnEnviar.setBackgroundColor(ContextCompat.getColor(this, R.color.edit))
         }
@@ -146,13 +147,14 @@ class AddClienteActivity : AppCompatActivity() {
 
                 } else {
                     viewModel.editCliente(cliente)
+                    Log.d("TAG", "setListener: $cliente")
                 }
             }
         }
 
         // Mostrar el DatePickerDialog al hacer clic en el EditText
         binding.etFechaNacRegister.setOnClickListener {
-            binding.etFechaNacRegister.mostrarDatePicker(this)
+            binding.etFechaNacRegister.mostrarDatePicker(this, true)
         }
     }
 
@@ -171,14 +173,14 @@ class AddClienteActivity : AppCompatActivity() {
         ) {
             Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
             return false
-        } else if (nombre.length < 5) {
-            binding.etNombre.error = "El nombre debe tener al menos 5 caracteres"
+        } else if (nombre.length < 2) {
+            binding.etNombre.error = "El nombre debe tener al menos 2 caracteres"
             return false
-        } else if (apellidos.length < 5) {
-            binding.etApellidos.error = "El apellido debe tener al menos 5 caracteres"
+        } else if (apellidos.length < 4) {
+            binding.etApellidos.error = "El apellido debe tener al menos 4 caracteres"
             return false
-        } else if (direccion.length < 10 || direccion.length > 40) {
-            binding.etDireccion.error = "La dirección debe tener entre 10 y 40 caracteres"
+        } else if (direccion.length < 5 || direccion.length > 40) {
+            binding.etDireccion.error = "La dirección debe tener entre 5 y 40 caracteres"
             return false
         } else if (!correo_electronico.matches(Regex("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"))) {
             binding.etCorreoElectronico.error = "El correo electrónico no tiene un formato válido"

@@ -4,74 +4,75 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:padding="16dp"
-    android:background="@color/rosado_claro"
     tools:context=".ui.activities.InfoDiagnosticoActivity">
 
     <!-- Título del diagnóstico -->
 
     <TextView
         android:id="@+id/tvNombreDiagnostico"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="30dp"
+        android:gravity="center"
         android:text="Nombre del Diagnóstico"
         android:textColor="@color/background_default"
         android:textSize="22sp"
-        android:gravity="center"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/diviserLine"
+        app:layout_constraintEnd_toEndOf="@+id/diviserLine"
+        app:layout_constraintStart_toStartOf="@+id/diviserLine"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
 
     <ProgressBar
         android:id="@+id/diviserLine"
         style="?android:attr/progressBarStyleHorizontal"
-        android:background="@color/background_default"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_margin="20dp"
-        android:progress="0"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/background_default"
         android:max="100"
+        android:progress="0"
+        app:layout_constraintBottom_toTopOf="@+id/labelFechaDiagnostico"
+        app:layout_constraintEnd_toEndOf="@+id/labelFechaDiagnostico"
+        app:layout_constraintStart_toStartOf="@+id/labelFechaDiagnostico"
         app:layout_constraintTop_toBottomOf="@+id/tvNombreDiagnostico"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintVertical_bias="0.5" />
 
     <!-- Label: Fecha del diagnóstico -->
     <TextView
         android:id="@+id/labelFechaDiagnostico"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginTop="10dp"
         android:text="@string/fecha_del_diagn_stico"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/diviserLine" />
+        app:layout_constraintBottom_toTopOf="@+id/etFechaDiagnosticoLayout"
+        app:layout_constraintEnd_toEndOf="@+id/etFechaDiagnosticoLayout"
+        app:layout_constraintStart_toStartOf="@+id/etFechaDiagnosticoLayout"
+        app:layout_constraintTop_toBottomOf="@+id/diviserLine" />
 
     <!-- TextInputLayout para Fecha de Diagnóstico -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etFechaDiagnosticoLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelFechaDiagnostico">
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/labelInicioTratamiento"
+        app:layout_constraintEnd_toEndOf="@+id/labelInicioTratamiento"
+        app:layout_constraintStart_toStartOf="@+id/labelInicioTratamiento"
+        app:layout_constraintTop_toBottomOf="@+id/labelFechaDiagnostico"
+        app:layout_constraintVertical_bias="0.5">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etFechaDiagnostico"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:ems="10"
             android:focusable="false"
             android:inputType="date" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -81,32 +82,33 @@
         android:id="@+id/labelInicioTratamiento"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="15dp"
         android:text="@string/fecha_de_inicio_del_tratamiento"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etFechaDiagnosticoLayout" />
+        app:layout_constraintBottom_toTopOf="@+id/etFechaInicioTratamientoLayout"
+        app:layout_constraintEnd_toEndOf="@+id/etFechaInicioTratamientoLayout"
+        app:layout_constraintStart_toStartOf="@+id/etFechaInicioTratamientoLayout"
+        app:layout_constraintTop_toBottomOf="@+id/etFechaDiagnosticoLayout"
+        app:layout_constraintVertical_bias="0.5" />
 
     <!-- TextInputLayout para Fecha de Inicio tratamiento -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etFechaInicioTratamientoLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelInicioTratamiento">
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/labelFinTratamiento"
+        app:layout_constraintEnd_toEndOf="@+id/labelFinTratamiento"
+        app:layout_constraintStart_toStartOf="@+id/labelFinTratamiento"
+        app:layout_constraintTop_toBottomOf="@+id/labelInicioTratamiento"
+        app:layout_constraintVertical_bias="0.5">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etFechaInicioTratamiento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:ems="10"
             android:focusable="false"
             android:inputType="date" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -116,32 +118,33 @@
         android:id="@+id/labelFinTratamiento"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="15dp"
         android:text="@string/fecha_de_fin_del_tratamiento"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etFechaInicioTratamientoLayout" />
+        app:layout_constraintBottom_toTopOf="@+id/etFechaFinTratamientoLayout"
+        app:layout_constraintEnd_toEndOf="@+id/etFechaFinTratamientoLayout"
+        app:layout_constraintStart_toStartOf="@+id/etFechaFinTratamientoLayout"
+        app:layout_constraintTop_toBottomOf="@+id/etFechaInicioTratamientoLayout"
+        app:layout_constraintVertical_bias="0.5" />
 
     <!-- TextInputLayout para Fecha de Nacimiento -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etFechaFinTratamientoLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelFinTratamiento">
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/labelObservaciones"
+        app:layout_constraintEnd_toEndOf="@+id/labelObservaciones"
+        app:layout_constraintStart_toStartOf="@+id/labelObservaciones"
+        app:layout_constraintTop_toBottomOf="@+id/labelFinTratamiento"
+        app:layout_constraintVertical_bias="0.5">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etFechaFinTratamiento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:ems="10"
             android:focusable="false"
             android:inputType="date" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -151,12 +154,14 @@
         android:id="@+id/labelObservaciones"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="@string/observaciones_o_s_ntomas"
         android:textSize="16sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/etObservaciones"
+        app:layout_constraintEnd_toEndOf="@+id/etObservaciones"
         app:layout_constraintStart_toStartOf="@+id/etObservaciones"
-        app:layout_constraintTop_toBottomOf="@+id/etFechaFinTratamientoLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/etFechaFinTratamientoLayout"
+        app:layout_constraintVertical_bias="0.5" />
 
     <!-- ScrollView para Observaciones -->
 
@@ -164,10 +169,10 @@
         android:id="@+id/etObservaciones"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/border"
+        android:backgroundTint="@color/sintomas"
         android:fontFamily="@font/roboto"
         android:gravity="top"
         android:inputType="textMultiLine"
@@ -175,30 +180,32 @@
         android:minLines="8"
         android:padding="8dp"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/labelObservaciones" />
+        app:layout_constraintBottom_toTopOf="@+id/labelMedicamentos"
+        app:layout_constraintEnd_toEndOf="@+id/labelMedicamentos"
+        app:layout_constraintStart_toStartOf="@+id/labelMedicamentos"
+        app:layout_constraintTop_toBottomOf="@+id/labelObservaciones" />
 
     <!-- Label: Medicamentos -->
     <TextView
         android:id="@+id/labelMedicamentos"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="@string/medicamentos"
         android:textSize="16sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/etMedicamentos"
+        app:layout_constraintEnd_toEndOf="@+id/etMedicamentos"
         app:layout_constraintStart_toStartOf="@+id/etMedicamentos"
-        app:layout_constraintTop_toBottomOf="@id/etObservaciones" />
+        app:layout_constraintTop_toBottomOf="@+id/etObservaciones"
+        app:layout_constraintVertical_bias="0.5" />
 
     <!-- Input: Medicamentos -->
     <EditText
         android:id="@+id/etMedicamentos"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/border"
         android:fontFamily="@font/roboto"
         android:gravity="top"
@@ -207,24 +214,25 @@
         android:minLines="3"
         android:padding="8dp"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/botones"
         app:layout_constraintTop_toBottomOf="@+id/labelMedicamentos" />
 
     <!-- Botones -->
     <LinearLayout
         android:id="@+id/botones"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="15dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etMedicamentos"
+        app:layout_constraintVertical_bias="0.5">
 
         <Button
             android:id="@+id/btn_actualizar"

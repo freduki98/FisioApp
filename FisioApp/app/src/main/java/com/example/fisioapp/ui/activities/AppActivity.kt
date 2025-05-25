@@ -1,47 +1,26 @@
 package com.example.fisioapp.ui.activities
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.provider.Settings
-import android.util.Log
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.example.fisioapp.R
 import com.example.fisioapp.databinding.ActivityAppBinding
 import com.example.fisioapp.domain.models.UserModel
 import com.example.fisioapp.ui.fragments.AjustesFragment
 import com.example.fisioapp.ui.fragments.GaleriaFragment
-import com.example.fisioapp.ui.fragments.HomeFragment
+import com.example.fisioapp.ui.fragments.ClienteFragment
 import com.example.fisioapp.ui.fragments.NoticiasFragment
-import com.example.fisioapp.ui.viewmodels.ClientesViewModel
 import com.example.fisioapp.ui.viewmodels.UserViewModel
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 
 class AppActivity : AppCompatActivity(){
 
@@ -63,16 +42,20 @@ class AppActivity : AppCompatActivity(){
 
     private lateinit var fisio : UserModel
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityAppBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        binding.bottomNavigation.selectedItemId = R.id.item_clientes
 
         // Inicializamos las variables de autenticación y base de datos
         auth = FirebaseAuth.getInstance()
@@ -94,18 +77,21 @@ class AppActivity : AppCompatActivity(){
             fechaNac = fisio.fechaNac
             especialidad = fisio.especialidad
 
-            val headerView = binding.navigationView.getHeaderView(0)
-            headerView.findViewById<TextView>(R.id.header_title).setText(fisio.nombre + " " + fisio.apellidos)
-            headerView.findViewById<TextView>(R.id.header_email).setText(fisio.correo)
+            actualizarHeader(nombre, apellidos, correo)
         }
 
         viewModel.traerFisio()
     }
 
+    fun actualizarHeader(nombre: String?, apellidos: String?, correo: String?) {
+        val headerView = binding.navigationView.getHeaderView(0)
+        headerView.findViewById<TextView>(R.id.header_title).text = "${nombre ?: ""} ${apellidos ?: ""}"
+        headerView.findViewById<TextView>(R.id.header_email).text = correo ?: ""
+    }
+
     private fun setMainConfig() {
-        navegarDestino("home", "FisioApp")
-        window.navigationBarColor = ContextCompat.getColor(this, R.color.background_default)
-        binding.bottomNavigation.selectedItemId = R.id.item_home
+        navegarDestino("clientes", "Clientes")
+        binding.bottomNavigation.selectedItemId = R.id.item_clientes
     }
 
 
@@ -129,8 +115,8 @@ class AppActivity : AppCompatActivity(){
                     true
                 }
 
-                R.id.item_home -> {
-                    navegarDestino("home", "FisioApp")
+                R.id.item_clientes -> {
+                    navegarDestino("clientes", "Clientes")
                     true
                 }
 
@@ -185,7 +171,7 @@ class AppActivity : AppCompatActivity(){
         val fragment = when (destino) {
 
             // Fragmentos
-            "home" -> HomeFragment().apply {
+            "clientes" -> ClienteFragment().apply {
                 arguments = Bundle().apply {
                     putString("correo", correo)
                 }
@@ -213,9 +199,6 @@ class AppActivity : AppCompatActivity(){
         if (destino == "chat") {
             startActivity(Intent(this, ChatActivity::class.java))
             binding.main.closeDrawer(GravityCompat.START)
-        } else if (destino == "clientes") {
-            startActivity(Intent(this, ClientesActivity::class.java))
-            binding.main.closeDrawer(GravityCompat.START)
         }
 
         // Le ponemos el título al topAppBar
@@ -228,6 +211,11 @@ class AppActivity : AppCompatActivity(){
             setReorderingAllowed(true)
             replace(R.id.fcv, fragment)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.bottomNavigation.selectedItemId = R.id.item_clientes
     }
 
 

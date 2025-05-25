@@ -5,23 +5,23 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/background_default"
+    android:background="@color/background_default"
     tools:context=".ui.activities.AppActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/background_default"
+        >
 
         <FrameLayout
             android:id="@+id/frameLayout"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:paddingTop="15dp"
+            android:layout_height="wrap_content"
             android:background="@color/background_default"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -34,6 +34,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="?attr/actionBarSize"
+                    android:paddingTop="25dp"
                     android:background="@color/background_default"
                     app:navigationIcon="@drawable/menu_hamburguesa"
                     app:titleTextColor="@color/white"
@@ -47,6 +48,7 @@
             android:id="@+id/fcv"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@color/rosado_claro"
             app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +82,6 @@
         android:background="@color/background_default"
         app:menu="@menu/menu_lateral"
         app:headerLayout="@layout/nav_header"
-
         />
 
 </androidx.drawerlayout.widget.DrawerLayout>
