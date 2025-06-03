@@ -17,7 +17,7 @@ Aplicación móvil desarrollada en **Android Studio** con **Kotlin**, orientada 
 - **Base de datos**: Firebase Realtime Database / Firestore / PostgreSQL (según funcionalidad)
 - **Autenticación**: Firebase Authentication
 - **Consumo de API externa**: Retrofit
-- **Consumo de API PROPIA**: Node.js 22.14.00
+- **Consumo de API propia**: Conexión con Aplicación (Node.js 22.14.00) desplegada en Azure
 - **Arquitectura**: Clean Architecture (Data, Domain, UI, Utils)
 - **Otros**: Material Design Components, RecyclerView, ViewModel, LiveData
 
