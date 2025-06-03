@@ -37,8 +37,8 @@ El manual de usuario se incluye como anexo en la documentación del proyecto.
 ## 🔗 Enlaces útiles
 
 - [Repositorio del proyecto (GitHub)](https://github.com/freduki98/FisioApp.git)
-- [Api Rest](https://github.com/freduki98/ApiRestFulFisioApp.git)
-- [Recursos utilizados para la base de datos](https://github.com/freduki98/PostgresDBFisioApp.git)
+- [Api Rest (GitHub)](https://github.com/freduki98/ApiRestFulFisioApp.git)
+- [Recursos utilizados para la base de datos (GitHub)](https://github.com/freduki98/PostgresDBFisioApp.git)
 
 ## 📃 Licencia
 
