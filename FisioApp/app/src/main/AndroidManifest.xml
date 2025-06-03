@@ -33,10 +33,6 @@
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.activities.ClientesActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.activities.ChatActivity"
             android:exported="false"
             android:screenOrientation="portrait" />

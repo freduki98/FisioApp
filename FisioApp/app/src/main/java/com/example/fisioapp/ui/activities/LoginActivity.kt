@@ -58,6 +58,9 @@ class LoginActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+            } else {
+                Toast.makeText(this, "No se pudo iniciar sesión con Google", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
@@ -137,7 +140,7 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
                     .addOnFailureListener {
-                        Toast.makeText(this, "No se pudo crear el usuario", Toast.LENGTH_SHORT)
+                        Toast.makeText(this, "No se pudo crear el usuario, vuelve a intentarlo más tarde.", Toast.LENGTH_SHORT)
                             .show()
                     }
             }
