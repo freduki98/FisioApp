@@ -23,7 +23,7 @@ Aplicación móvil desarrollada en **Android Studio** con **Kotlin**, orientada 
 
 ## 🚀 Despliegue
 
-La aplicación se ha compilado en modo `release`, firmada con un keystore propio, y está lista para instalarse en dispositivos Android mediante el archivo `.apk` generado.
+La aplicación se ha compilado en modo `release`, firmada con un keystore propio, y está lista para instalarse en dispositivos Android mediante el archivo `.apk` generado. Se puede encontrar el enlace a su descarga en el anexo dentro de la documentación del proyecto.
 
 
 ## 👥 Usuarios
