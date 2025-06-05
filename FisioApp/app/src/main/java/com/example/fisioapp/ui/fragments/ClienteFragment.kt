@@ -38,6 +38,8 @@ class ClienteFragment : Fragment(R.layout.fragment_cliente) {
 
     private var fisio_id = ""
 
+    private var buscando_persona = false
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -77,7 +79,7 @@ class ClienteFragment : Fragment(R.layout.fragment_cliente) {
                 binding.fabAdd.isEnabled = true
                 binding.searchView.isEnabled = true
 
-                if (it.isEmpty()) {
+                if (it.isEmpty() && !buscando_persona) {
                     binding.tvNoClientes.visibility = View.VISIBLE
                 } else {
                     binding.tvNoClientes.visibility = View.INVISIBLE
@@ -150,8 +152,10 @@ class ClienteFragment : Fragment(R.layout.fragment_cliente) {
                 if (binding.searchView.isEnabled) {
                     if (searchQuery.isNotEmpty()) {
                         viewModel.traerCliente(searchQuery, fisio_id)
+                        buscando_persona = true
                     } else {
                         viewModel.traerClientes(fisio_id)
+                        buscando_persona = false
                     }
                 }
 
